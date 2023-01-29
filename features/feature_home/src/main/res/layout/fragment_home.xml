@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ResourceName">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/ic_logo_sage"
+            android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:id="@+id/btProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_menu_profile"
+            android:textAllCaps="false"
+            style="@style/Regular12"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_account_circle"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:layout_gravity="right" />
+
+        <Button
+            android:id="@+id/btManageSubscription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shared_res_subscription"
+            style="@style/Regular14White"
+            android:background="@drawable/bg_rounded_6_gradient"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:drawableRight="@drawable/ic_next"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_24sdp"
+            android:drawableTint="@color/white"/>
+
+        <Button
+            android:id="@+id/btTukang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_tukang"
+            style="@style/Regular14White"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:drawableRight="@drawable/ic_next"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_24sdp"
+            android:drawableTint="@color/white"/>
+
+        <Button
+            android:id="@+id/btDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_driver"
+            style="@style/Regular14White"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:drawableRight="@drawable/ic_next"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_24sdp"
+            android:drawableTint="@color/white"/>
+
+        <Button
+            android:id="@+id/btSendInvoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_menu_send_invoice"
+            style="@style/Regular14White"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:drawableRight="@drawable/ic_next"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_12sdp"
+            android:drawableTint="@color/white"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btManageOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_menu_manage_order"
+            style="@style/Regular14White"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:drawableRight="@drawable/ic_next"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_12sdp"
+            android:drawableTint="@color/white"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btSignOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_menu_sign_out"
+            style="@style/Regular14White"
+            android:drawableLeft="@drawable/ic_logout"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/red"
+            android:paddingRight="@dimen/_24sdp"
+            android:paddingLeft="@dimen/_8sdp"
+            android:drawableTint="@color/white"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <Button
+            android:id="@+id/btQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_menu_question"
+            style="@style/Regular14White"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingLeft="@dimen/_12sdp"/>
+    </LinearLayout>
+</ScrollView>

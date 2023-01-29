@@ -1,0 +1,8 @@
+ext {
+    realTaskNames = gradle.startParameter.taskNames.join().toString()
+    taskNames = realTaskNames.toLowerCase()
+    isRelease = taskNames.contains('release')
+    isQa = taskNames.contains('qa')
+    isDebug = taskNames.contains('debug')
+    isReleaseQa = isRelease || isQa
+}

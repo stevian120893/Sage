@@ -1,0 +1,22 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+android {
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    defaultConfig {
+        buildConfigField "String", "APP_NAME", "\"${appName}\""
+        buildConfigField "int", "VERSION_CODE", "${appVersionCode}"
+        buildConfigField "String", "VERSION_NAME", "\"${appVersionName}\""
+    }
+}
+
+dependencies {
+    api "$appDependencies.gson"
+    api project(':libs:lib_pref')
+    implementation "$appDependencies.livedata"
+    implementation "$appDependencies.roomCommon"
+
+    // DO NOT PUT DEPENDENCIES RELATED TO UI HERE ex: bazaar, material design, appcompat, etc
+}

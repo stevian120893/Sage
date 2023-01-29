@@ -1,0 +1,15 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+android {
+    resourcePrefix "${project.name.substring(project.name.indexOf("_") + 1)}_"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation "$appDependencies.kotlinCoroutines"
+    implementation "$appDependencies.kotlinStdlib"
+}

@@ -1,0 +1,10 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+dependencies {
+    implementation project(':libs:lib_api')
+    implementation project(':libs:lib_pref')
+    implementation project(':libs:lib_util')
+
+    implementation "$appDependencies.gson"
+    implementation "$appDependencies.kotlinCoroutines"
+}

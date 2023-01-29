@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.mib.sage.lib_pref"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <provider
+            android:authorities="${applicationId}.PrefModuleInitProvider"
+            android:name="com.mib.lib_pref.init.ModuleInitProvider"
+            android:initOrder="1000"
+            android:exported="false" />
+    </application>
+</manifest>

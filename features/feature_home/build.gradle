@@ -1,0 +1,41 @@
+apply plugin: 'kotlin-kapt'
+apply from: "$rootDir/gradle_scripts/feature.gradle"
+apply from: "$rootDir/gradle_scripts/hilt.gradle"
+
+android {
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    defaultConfig {
+        buildConfigField "String", "APP_NAME", "\"${appName}\""
+        buildConfigField "int", "VERSION_CODE", "${appVersionCode}"
+        buildConfigField "String", "VERSION_NAME", "\"${appVersionName}\""
+    }
+}
+
+dependencies {
+    implementation project(':libs:lib_api')
+    api project(':libs:lib_auth')
+    implementation project(':libs:lib_coroutines')
+    implementation project(':libs:lib_mvvm')
+    implementation project(':libs:lib_navigation')
+
+    implementation "$appDependencies.androidMaterial"
+    implementation "$appDependencies.auth"
+    implementation "$appDependencies.authApiPhone"
+    implementation "$appDependencies.apache"
+    implementation "$appDependencies.dexter"
+    implementation "$appDependencies.easyImage"
+    implementation "$appDependencies.glide"
+    implementation "$appDependencies.jetpackNavFragmentKtx"
+    implementation "$appDependencies.lifecycleKtx"
+    implementation "$appDependencies.sdp"
+    implementation "$appDependencies.facebookShimmer"
+    implementation "$appDependencies.swipeRefreshLayout"
+    implementation "$appDependencies.zelory"
+}

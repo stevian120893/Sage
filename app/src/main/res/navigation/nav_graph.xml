@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    tools:ignore="InvalidNavigation">
+
+    <!-- startDestination will be conditional and set programmatically on MainActivity -->
+
+    <!--region fragment-->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.mib.feature_home.presentation.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mib.feature_home.contents.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/tukangMenuFragment"
+        android:name="com.mib.feature_home.contents.tukang.menu.TukangMenuFragment"
+        android:label="TukangMenuFragment" />
+    <fragment
+        android:id="@+id/addAdditionalDataFragment"
+        android:name="com.mib.feature_home.contents.driver.add_additional_data.AddAdditionalDataFragment"
+        android:label="AddAdditionalDataFragment" />
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="com.mib.feature_home.contents.tukang.category.add.AddCategoryFragment"
+        android:label="AddCategoryFragment" />
+    <fragment
+        android:id="@+id/addSubcategoryFragment"
+        android:name="com.mib.feature_home.contents.tukang.subcategory.add.AddSubcategoryFragment"
+        android:label="AddSubcategoryFragment" />
+    <fragment
+        android:id="@+id/setAvailabilityFragment"
+        android:name="com.mib.feature_home.contents.tukang.availability.SetAvailabilityFragment"
+        android:label="SetAvailabilityFragment" />
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.mib.feature_home.contents.tukang.product.list.ProductListFragment"
+        android:label="ProductListFragment" />
+    <fragment
+        android:id="@+id/sendInvoiceFragment"
+        android:name="com.mib.feature_home.contents.invoice.SendInvoiceFragment"
+        android:label="SendInvoiceFragment" />
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.mib.feature_home.contents.order.list.OrderListFragment"
+        android:label="OrderListFragment" />
+    <fragment
+        android:id="@+id/subscriptionFragment"
+        android:name="com.mib.feature_home.contents.subscription.SubscriptionFragment"
+        android:label="SubscriptionFragment" />
+    <fragment
+        android:id="@+id/promoListFragment"
+        android:name="com.mib.feature_home.contents.tukang.promo.list.PromoListFragment"
+        android:label="PromoListFragment" />
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.mib.feature_home.contents.tukang.category.list.CategoryListFragment"
+        android:label="CategoryListFragment" />
+    <fragment
+        android:id="@+id/subcategoryListFragment"
+        android:name="com.mib.feature_home.contents.tukang.subcategory.list.SubcategoryListFragment"
+        android:label="SubcategoryListFragment" />
+    <fragment
+        android:id="@+id/providerFragment"
+        android:name="com.mib.feature_home.contents.provider.ProviderFragment"
+        android:label="ProviderFragment" />
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.mib.feature_home.contents.tukang.product.add.AddProductFragment"
+        android:label="AddProductFragment" />
+    <fragment
+        android:id="@+id/addPromoFragment"
+        android:name="com.mib.feature_home.contents.tukang.promo.add.AddPromoFragment"
+        android:label="AddPromoFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.mib.feature_home.contents.login.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.mib.feature_home.contents.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <dialog
+        android:id="@+id/loadingDialog"
+        android:name="com.mib.feature_home.utils.LoadingDialogFragment"
+        android:label="LoadingDialogFragment" />
+    <!--end region-->
+
+    <!--region action-->
+    <action
+        android:id="@+id/action_homeFragment"
+        app:destination="@id/homeFragment" />
+    <action
+        android:id="@+id/action_profileFragment"
+        app:destination="@id/profileFragment" />
+    <action
+        android:id="@+id/action_tukangMenuFragment"
+        app:destination="@id/tukangMenuFragment" />
+    <action
+        android:id="@+id/action_driverMenuFragment"
+        app:destination="@id/addAdditionalDataFragment" />
+    <action
+        android:id="@+id/action_add_category_fragment"
+        app:destination="@id/addCategoryFragment" />
+    <action
+        android:id="@+id/action_add_subcategory_fragment"
+        app:destination="@id/addSubcategoryFragment" />
+    <action
+        android:id="@+id/action_set_availability_fragment"
+        app:destination="@id/setAvailabilityFragment" />
+    <action
+        android:id="@+id/action_product_list_fragment"
+        app:destination="@id/productListFragment" />
+    <action
+        android:id="@+id/action_send_invoice_fragment"
+        app:destination="@id/sendInvoiceFragment" />
+    <action
+        android:id="@+id/action_order_list_fragment"
+        app:destination="@id/orderListFragment" />
+    <action
+        android:id="@+id/action_subscription_fragment"
+        app:destination="@id/subscriptionFragment" />
+    <action
+        android:id="@+id/action_promo_list_fragment"
+        app:destination="@id/promoListFragment" />
+    <action
+        android:id="@+id/action_category_list_fragment"
+        app:destination="@id/categoryListFragment" />
+    <action
+        android:id="@+id/action_subcategory_list_fragment"
+        app:destination="@id/subcategoryListFragment" />
+    <action
+        android:id="@+id/action_provider_fragment"
+        app:destination="@id/providerFragment" />
+    <action
+        android:id="@+id/action_add_product_fragment"
+        app:destination="@id/addProductFragment" />
+    <action
+        android:id="@+id/action_add_promo_fragment"
+        app:destination="@id/addPromoFragment" />
+    <action
+        android:id="@+id/action_login_fragment"
+        app:destination="@id/loginFragment" />
+    <action
+        android:id="@+id/action_register_fragment"
+        app:destination="@id/registerFragment" />
+    <action
+        android:id="@+id/action_loadingDialog"
+        app:destination="@id/loadingDialog" />
+    <!--end region-->
+</navigation>

@@ -1,0 +1,146 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ResourceName">
+
+<!--    home menu-->
+    <string name="home_menu_profile">Profil</string>
+    <string name="home_tukang">Tukang</string>
+    <string name="home_driver">Ojol AB ride</string>
+    <string name="home_menu_add_category">Tambah kategori</string>
+    <string name="home_menu_add_subcategory">Tambah Subkategori</string>
+    <string name="home_menu_provider">Profil pekerjaan</string>
+    <string name="home_menu_set_availability">Atur jam tersedia</string>
+    <string name="home_menu_add_edit_product">Tambah / ubah produk</string>
+    <string name="home_menu_send_invoice">Kirim invoice</string>
+    <string name="home_menu_manage_order">Atur pesanan</string>
+    <string name="home_menu_manage_subscription">Atur langganan</string>
+    <string name="home_menu_add_edit_promo">Tambah / ubah promo</string>
+    <string name="home_menu_sign_out">Keluar</string>
+    <string name="home_menu_sign_out_ask">Anda yakin ingin keluar?</string>
+    <string name="home_menu_question">Pertanyaan?</string>
+
+<!--    shared-->
+    <string name="shared_res_save">Simpan</string>
+    <string name="shared_res_failed_to_save">Gagal untuk menyimpan</string>
+    <string name="shared_res_success_to_save">Berhasil menyimpan</string>
+    <string name="shared_res_please_fill_blank_space">Harap lengkapi data yang tersedia</string>
+    <string name="shread_res_edit">Ubah</string>
+    <string name="shared_res_name">Nama</string>
+    <string name="shared_res_location">lokasi</string>
+    <string name="shared_res_subscription">Langganan</string>
+    <string name="shared_res_send">Kirim</string>
+    <string name="shared_res_buy">Beli</string>
+    <string name="shared_res_pay">Bayar</string>
+    <string name="shared_res_yes">Ya</string>
+    <string name="shared_res_no">Tidak</string>
+    <string name="shared_res_email">Email</string>
+    <string name="shared_res_password">Password</string>
+    <string name="shared_res_register">Daftar</string>
+    <string name="shared_res_have_account">Belum punya akun?</string>
+    <string name="shared_res_login">Masuk</string>
+    <string name="shared_res_loading">Tunggu..</string>
+    <string name="shared_res_success">Berhasil</string>
+    <string name="shared_res_failed">Gagal</string>
+    <string name="shared_res_failed_load">Gagal memuat</string>
+    <string name="shared_res_no_data">Belum ada data</string>
+    <string name="shared_res_copied">Tersalin</string>
+    <string name="shared_res_yes_logout">Ya, keluar</string>
+    <string name="shared_res_back">Kembali</string>
+    <string name="shared_res_whatsapp_number">085882411322</string>
+
+<!--    profile-->
+    <string name="profile_upload_profile_picture">Unggah Foto Profil</string>
+    <string name="profile_upload_ktp_picture">Unggah Foto KTP</string>
+    <string name="profile_upload_ktp_picture_person">Unggah Foto KTP &amp; selfie</string>
+    <string name="profile_ktp_picture">Foto KTP</string>
+    <string name="profile_ktp_picture_person">Foto KTP &amp; selfie</string>
+    <string name="profile_bank_name">Nama Bank</string>
+    <string name="profile_bank_account_number">Nomor Rekening</string>
+    <string name="profile_referral_code">Kode referal</string>
+    <string name="profile_tier_name">Nama level</string>
+
+<!--    register-->
+    <string name="register_verification_code">Kode</string>
+    <string name="register_send_code">Kirim kode</string>
+    <string name="register_please_fill_email">Harap masukkan email anda</string>
+    <string name="register_verification_code_info">Kode akan dikirimkan ke e-mail Anda</string>
+    <string name="register_location_info">Pilih lokasi Anda</string>
+    <string name="register_bank_info">Pilih Bank pilihan Anda</string>
+    <string name="register_succeed">Berhasil mendaftar</string>
+    <string name="register_send_code_succeed">Harap cek email Anda.</string>
+
+<!--    category-->
+    <string name="category_name">Nama kategori</string>
+    <string name="category_is_blank">Kategori Anda kosong</string>
+
+<!--    subcategory-->
+    <string name="choose_category">Pilih kategori</string>
+    <string name="subcategory_name">Nama subkategori</string>
+    <string name="selected_category">Kategori terpilih</string>
+
+<!--    set availability-->
+    <string name="shared_res_sunday">Minggu</string>
+    <string name="shared_res_monday">Senin</string>
+    <string name="shared_res_tuesday">Selasa</string>
+    <string name="shared_res_wednesday">Rabu</string>
+    <string name="shared_res_thursday">Kamis</string>
+    <string name="shared_res_friday">Jumat</string>
+    <string name="shared_res_saturday">Sabtu</string>
+    <string name="shared_res_closed">Tutup</string>
+    <string name="shared_res_open">Buka</string>
+    <string name="open_hour">Jam buka</string>
+    <string name="closed_hour">Jam tutup</string>
+    <string name="shared_res_active">Aktif</string>
+
+<!--    product-->
+    <string name="choose_category_to_action">Pilih kategori yang ingin anda tampilkan &amp; tambah</string>
+    <string name="choose_subcategory_to_action">Pilih subkategori yang ingin anda tampilkan &amp; tambah</string>
+
+<!--    invoice-->
+    <string name="choose_order_to_action">Pilih order yang ingin anda pakai</string>
+    <string name="total_price">Total harga</string>
+
+<!--    subscription-->
+    <string name="subscription_expired_date">Langganan Anda akan berakhir pada tanggal %s\nSilahkan lakukan perpanjangan dibawah ini.</string>
+    <string name="choose_subscription">Pilih langganan yang tersedia</string>
+    <string name="subscription_info">Info langganan</string>
+    <string name="bank_info">Harap hanya melakukan pembayaran ke akun rekening dibawah ini</string>
+    <string name="upload_payment_proof">Unggah bukti pembayaran</string>
+    <string name="buy_subscription_succeed">Pembelian berhasil, harap cek status.</string>
+    <string name="subscription_list">Daftar langganan</string>
+    <string name="subscription_referral_code">Kode referal (Jika ada)</string>
+
+<!--    product-->
+    <string name="product_name">Nama produk</string>
+    <string name="product_description">Deskripsi produk</string>
+    <string name="product_upload_picture">Unggah Foto Produk</string>
+    <string name="product_price">Harga produk</string>
+    <string name="product_years_of_experience">Tahun pengalaman</string>
+    <string name="product_years">%s tahun</string>
+
+<!--    promo-->
+    <string name="promo_title">Judul promo</string>
+    <string name="promo_description">Deskripsi promo</string>
+    <string name="promo_code">Kode promo</string>
+    <string name="promo_discount_amount">Total diskon promo</string>
+    <string name="promo_minimum_transaction">Minimum transaksi</string>
+    <string name="promo_quota">Kuota promo</string>
+    <string name="promo_start_date">Tanggal mulai</string>
+    <string name="promo_expired_date">Tanggal kadaluwarsa</string>
+    <string name="promo_upload_picture">Unggah Foto Promo</string>
+
+<!--    provider-->
+    <string name="years_of_experience">Tahun pengalaman</string>
+    <string name="is_accept_cash">Menerima pembayaran tunai?</string>
+    <string name="is_accept_bank_transfer">Menerima pembayaran transfer?</string>
+
+<!--    image-->
+    <string name="upload_image">Unggah gambar</string>
+    <string name="upload_image_via">Unggah gambar melalui..</string>
+    <string name="galery">Galeri</string>
+    <string name="camera">Kamera</string>
+
+<!--    driver-->
+    <string name="upload_sim">Unggah SIM</string>
+    <string name="upload_stnk">Unggah STNK</string>
+    <string name="upload_skck">Unggah SKCK</string>
+</resources>

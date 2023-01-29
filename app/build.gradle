@@ -1,0 +1,107 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.firebase.crashlytics'
+apply from: "$rootDir/gradle_scripts/hilt.gradle"
+apply from: "$rootDir/gradle_scripts/keystore.gradle"
+apply from: "$rootDir/gradle_scripts/param.gradle"
+//apply plugin: 'com.google.firebase.firebase-perf'
+
+android {
+    compileSdk builds.compileSdk
+
+    defaultConfig {
+        manifestPlaceholders
+        buildConfigField "String", "STAGING_HOST", "\"$stagingHost\""
+
+        applicationId "com.mib.sage"
+        minSdk builds.minSdk
+        targetSdk builds.compileSdk
+        versionCode appVersionCode
+        versionName appVersionName
+        manifestPlaceholders['appAuthRedirectScheme'] = 'com.mib.sage'
+        ndk {
+            // Filter for architectures supported by Flutter.
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64', 'x86'
+        }
+        signingConfig signingConfigs.debug
+    }
+
+    signingConfigs {
+        debug {
+            storeFile = file(keystoreProperties['STORE_FILE'])
+            storePassword = keystoreProperties['STORE_PASS']
+            keyAlias = keystoreProperties['KEY_ALIAS']
+            keyPassword = keystoreProperties['KEY_PASS']
+        }
+        release {
+            storeFile file(keystoreProperties['STORE_FILE'])
+            storePassword keystoreProperties['STORE_PASS']
+            keyAlias keystoreProperties['KEY_ALIAS']
+            keyPassword keystoreProperties['KEY_PASS']
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+            versionNameSuffix "-debug"
+            applicationIdSuffix ".debug"
+            buildConfigField "String", "FILE_AUTHORITY", "\"${appId}.debug.provider\""
+            manifestPlaceholders.fileProviderAuthority = "${appId}.debug.provider"
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
+            }
+        }
+        release {
+//            shrinkResources true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'gson-rules.pro'
+            buildConfigField "String", "FILE_AUTHORITY", "\"${appId}.provider\""
+            manifestPlaceholders.fileProviderAuthority = "${appId}.provider"
+            signingConfig signingConfigs.release
+//            firebaseCrashlytics.mappingFileUploadEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+    implementation project(':libs:lib_api')
+    implementation project(':libs:lib_auth')
+    implementation project(':libs:lib_coroutines')
+    implementation project(':libs:lib_navigation')
+    implementation project(':libs:lib_util')
+    implementation project(':libs:lib_user')
+    implementation project(':features:feature_home')
+
+    implementation "$appDependencies.androidMaterial"
+    implementation "$appDependencies.appcompat"
+    implementation "$appDependencies.coreKtx"
+    implementation "$appDependencies.jetpackNavFragmentKtx"
+    implementation "$appDependencies.jetpackNavUI"
+    implementation "$appDependencies.playCore"
+    implementation "$appDependencies.recyclerView"
+    implementation "$appDependencies.splashScreen"
+    implementation "$appDependencies.workManager"
+    implementation "$appDependencies.glide"
+    kapt "$appDependencies.deeplinkProcessor"
+
+    // Firebase
+//    implementation platform("$appDependencies.firebaseBom")
+//    implementation "$appDependencies.firebaseAnalytic"
+//    implementation "$appDependencies.firebaseConfig"
+//    implementation "$appDependencies.firebaseCrashlytic"
+//    implementation "$appDependencies.firebaseCore"
+//    implementation "$appDependencies.firebaseMessaging"
+}

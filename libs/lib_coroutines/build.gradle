@@ -1,0 +1,7 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+dependencies {
+    implementation "$appDependencies.inject"
+    implementation "$appDependencies.kotlinCoroutines"
+    implementation "$appDependencies.kotlinStdlib"
+}

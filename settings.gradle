@@ -1,0 +1,14 @@
+rootProject.name = "sage_android"
+
+include ':app'
+
+include ':libs:lib_api',
+        ':libs:lib_util',
+        ':libs:lib_mvvm',
+        ':libs:lib_navigation',
+        ':libs:lib_auth',
+        ':libs:lib_pref',
+        ':libs:lib_user'
+
+include ':features:feature_home'
+include ':libs:lib_coroutines'

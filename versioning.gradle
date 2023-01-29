@@ -1,0 +1,64 @@
+apply from: "$rootDir/gradle_scripts/stdlib.gradle"
+
+ext {
+    appVersion = [
+            "major": 1,
+            "minor": 0,
+            "patch": 0
+    ]
+
+    final isDaily = System.getenv('IS_DAILY')?.toBoolean() ?: false
+    final isNightly = System.getenv('IS_NIGHTLY')?.toBoolean() ?: false
+
+    generateVersionCode = {
+        def baseVersionCode = appVersion.major * 1_000_000 + appVersion.minor * 1000
+
+        if (isDaily || isNightly) {
+            return (baseVersionCode + appVersion.patch) * 1000 + getDateForVersion()
+        } else {
+            return baseVersionCode + appVersion.patch
+        }
+    }
+
+    generateVersionName = {
+        def versionName = "${appVersion.major}.${appVersion.minor}.${appVersion.patch}"
+        if (isDebug) {
+            suffix = '-debug'
+        } else if (isQa) {
+            suffix = '-qa'
+        } else {
+            suffix = ''
+        }
+        return "$versionName$suffix"
+    }
+
+    getDateForVersion = {
+        final month = new Date().format('MM')
+        final day = new Date().format('dd')
+        final hour = new Date().format('hh')
+
+        // Example: 010812 for January 8th 12 P.M.
+        return Integer.parseInt(month + day + hour)
+    }
+
+    getFormattedDate = {
+        // might be better with hh-dd-MM-yy
+        return new Date().format('HH-ddMMyy')
+    }
+
+    appVersionCode = generateVersionCode()
+    appVersionName = generateVersionName()
+    appName = "sage_android"
+    appId = "com.mib.sage"
+}
+
+tasks.register('checkVersion') {
+    doLast {
+        println "Version code: ${appVersionCode}"
+        println "Version name: ${appVersionName}"
+    }
+}
+
+tasks.register('checkVersionRelease') {
+    dependsOn(checkVersion)
+}

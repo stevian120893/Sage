@@ -1,0 +1,10 @@
+final DEFAULT_HOST = ''
+
+ext {
+    // Gradle project params (via -PparamName)
+    getParam = { key, defaultValue ->
+        project.hasProperty(key) ? project.property(key) : defaultValue
+    }
+
+    stagingHost = getParam('stagingHost', DEFAULT_HOST)
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SageAdmin</string>
+    <string name="title_libs">Module Title</string>
+
+    <string name="profile">Profil</string>
+    <string name="edit">Ubah</string>
+</resources>

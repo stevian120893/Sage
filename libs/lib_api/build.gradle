@@ -1,0 +1,20 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+android {
+    defaultConfig {
+        buildConfigField "String", "APP_NAME", "\"${appName}\""
+        buildConfigField "int", "VERSION_CODE", "${appVersionCode}"
+        buildConfigField "String", "VERSION_NAME", "\"${appVersionName}\""
+    }
+}
+
+dependencies {
+    implementation "$appDependencies.kotlinCoroutines"
+    implementation "$appDependencies.kotlinStdlib"
+
+    implementation project(':libs:lib_util')
+
+    api "$appDependencies.retrofit"
+    api "$appDependencies.retrofitGson"
+    api project(':libs:lib_pref')
+}

@@ -1,0 +1,16 @@
+import groovy.json.JsonSlurper
+final readJsonToken = {
+    def buildType = 'staging'
+    if (isRelease) {
+        buildType = 'production'
+    }
+    def filePath = "token-${buildType}.json"
+    final json = new JsonSlurper()
+    return json.parseText(file(filePath).text)
+}
+final jsonToken = readJsonToken()
+
+ext {
+    tokenMap = jsonToken.toMapString()
+    getToken = { key -> return jsonToken[key] }
+}

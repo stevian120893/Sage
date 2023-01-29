@@ -1,0 +1,6 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+dependencies {
+    implementation "$appDependencies.kotlinStdlib"
+    implementation "$appDependencies.androidxAnnotation"
+}

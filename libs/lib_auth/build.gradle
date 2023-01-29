@@ -1,0 +1,10 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+dependencies {
+    implementation "$appDependencies.kotlinCoroutines"
+    implementation "$appDependencies.kotlinStdlib"
+    implementation "$appDependencies.securityCrypto"
+
+    api project(":libs:lib_api")
+    api project(":libs:lib_pref")
+}

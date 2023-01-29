@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llAdapterParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:padding="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_8sdp">
+
+    <ImageView
+        android:id="@+id/ivPromoImage"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tvPromoName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        style="@style/Medium14"
+        android:layout_toRightOf="@+id/ivPromoImage"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_1sdp"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        style="@style/Regular12Gray"
+        android:layout_toRightOf="@+id/ivPromoImage"
+        android:layout_below="@+id/tvPromoName"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:maxLines="2"/>
+
+    <ImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/bg_rounded_6"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_edit"
+        android:padding="@dimen/_4sdp"/>
+
+</RelativeLayout>

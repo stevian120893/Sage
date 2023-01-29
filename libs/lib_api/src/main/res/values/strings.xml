@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_general_error">Something went wrong</string>
+    <string name="api_connection_error">Oops, something happened. Please try again in 10 minutes.</string>
+    <string name="api_user_frozen_error">User account status is frozen</string>
+    <string name="api_user_unauthorized">Maaf, sesi Anda telah berakhir. Silahkan login kembali.</string>
+    <string name="api_withdrawal_not_found_error">Withdrawal not found</string>
+    <string name="api_maintenance_error">Sage is under maintenance. Please check again later.</string>
+
+    <string name="api_voucher_not_found_error">Hmm… we can\'t find that voucher</string>
+    <string name="api_voucher_not_found_out_of_quota_error">Sorry, no quota left on this voucher</string>
+    <string name="api_voucher_not_found_usage_reach_limit_error">Max. usage limit exceeded</string>
+    <string name="api_voucher_not_found_daily_usage_reach_limit_error">Sorry, this voucher can\'t be used</string>
+    <string name="api_voucher_not_found_not_present_error">Sorry, this voucher is no longer valid.</string>
+    <string name="api_voucher_not_found_campaign_not_started_error">This voucher can\'t be used until </string>
+    <string name="api_voucher_not_found_campaign_ended_error">Sorry, voucher expired</string>
+
+    <string name="api_voucher_not_eligible_transaction_amount_not_enough_error">This voucher requires min. transaction of </string>
+    <string name="api_voucher_not_eligible_invalid_category_general_error">Only valid for select categories.</string>
+
+    <string name="api_referral_code_invalid_error">Referral code not valid</string>
+</resources>

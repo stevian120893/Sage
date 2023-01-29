@@ -1,0 +1,28 @@
+apply from: "$rootDir/gradle_scripts/lib.gradle"
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true
+        animationsDisabled = true
+    }
+    resourcePrefix "lib_mvvm_"
+}
+
+dependencies {
+    implementation "$appDependencies.appcompat"
+    implementation "$appDependencies.dexter"
+    implementation "$appDependencies.easyImage"
+    implementation "$appDependencies.kotlinStdlib"
+    implementation "$appDependencies.recyclerView"
+
+    implementation project(':libs:lib_navigation')
+
+    api project(':libs:lib_util')
+    api "$appDependencies.fragment"
+    api "$appDependencies.lifecycleKtx"
+    api "$appDependencies.viewmodel"
+}

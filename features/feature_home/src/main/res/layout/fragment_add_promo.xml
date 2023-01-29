@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ResourceName">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_16sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_back"/>
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_icon"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/cbActive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shared_res_active"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_16sdp"/>
+
+        <EditText
+            android:id="@+id/etPromoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_title"
+            android:inputType="textCapSentences"
+            style="@style/Regular14"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etPromoDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_description"
+            android:inputType="textCapSentences"
+            style="@style/Regular14"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etPromoCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_code"
+            android:inputType="textCapSentences"
+            style="@style/Regular14"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etPromoAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_discount_amount"
+            style="@style/Regular14"
+            android:inputType="number"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etMinimumTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_minimum_transaction"
+            style="@style/Regular14"
+            android:inputType="number"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etQuota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_quota"
+            style="@style/Regular14"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_start_date"
+            style="@style/Regular14"
+            android:focusable="false"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <EditText
+            android:id="@+id/etExpiredDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/promo_expired_date"
+            style="@style/Regular14"
+            android:focusable="false"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_8sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/promo_upload_picture"
+                style="@style/SemiBold20"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGrayLine"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"/>
+            <ImageView
+                android:id="@+id/ivAddPhotoPromo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_add_photo"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_6"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/shared_res_save"
+            style="@style/ButtonText"
+            android:layout_marginTop="@dimen/_30sdp"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,26 @@
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    lintOptions {
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation "com.google.dagger:hilt-android:$versions.dagger"
+    kapt "com.google.dagger:hilt-compiler:$versions.dagger"
+
+//    testImplementation "$testDependencies.hiltTesting"
+//    kaptTest "$testDependencies.hiltCompiler"
+
+//    androidTestImplementation "$androidTestDependencies.hiltTesting"
+//    kaptAndroidTest "$androidTestDependencies.hiltCompiler"
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+hilt {
+    enableExperimentalClasspathAggregation = true
+}

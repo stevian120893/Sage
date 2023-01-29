@@ -1,0 +1,60 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    apply from: "$rootDir/gradle_scripts/stdlib.gradle"
+    apply from: "versioning.gradle"
+    apply from: "dependencies.gradle"
+    apply from: "$rootDir/gradle_scripts/token.gradle"
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradlePlugins.agp"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.dagger"
+        classpath "com.google.gms:google-services:$versions.googleServices"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$gradlePlugins.crashlytic"
+        classpath "com.google.firebase:perf-plugin:$gradlePlugins.performance"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://www.jitpack.io" }
+        maven { url "https://androidx.dev/snapshots/builds/7950381/artifacts/repository" }
+    }
+
+    configurations.all {
+        resolutionStrategy.force "androidx.activity:activity:$versions.activity"
+        resolutionStrategy.force "androidx.annotation:annotation:$versions.androidxAnnotation"
+        resolutionStrategy.force "androidx.arch.core:core-runtime:$versions.androidxArch"
+        resolutionStrategy.force "androidx.collection:collection:$versions.androidxCollection"
+        resolutionStrategy.force "androidx.coordinatorlayout:coordinatorlayout:$versions.coordinatorLayout"
+        resolutionStrategy.force "androidx.core:core:$versions.androidxCore"
+        resolutionStrategy.force "androidx.core:core-ktx:$versions.androidxCore"
+        resolutionStrategy.force "androidx.customview:customview:$versions.androidxCustomview"
+        resolutionStrategy.force "androidx.drawerlayout:drawerlayout:$versions.androidxDrawerLayout"
+        resolutionStrategy.force "androidx.fragment:fragment:$versions.fragment"
+        resolutionStrategy.force "androidx.lifecycle:lifecycle-common:$versions.lifecycle"
+        resolutionStrategy.force "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle"
+        resolutionStrategy.force "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+        resolutionStrategy.force "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+        resolutionStrategy.force "androidx.recyclerview:recyclerview:$versions.recyclerView"
+        resolutionStrategy.force "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swipeRefreshLayout"
+        resolutionStrategy.force "androidx.transition:transition:$versions.transition"
+        resolutionStrategy.force "com.squareup.okhttp3:okhttp:$versions.okhttp"
+        resolutionStrategy.force "com.squareup.retrofit2:retrofit:$versions.retrofit"
+        resolutionStrategy.force "com.squareup.retrofit2:converter-gson:$versions.retrofitGson"
+        resolutionStrategy.force "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinCoroutines"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

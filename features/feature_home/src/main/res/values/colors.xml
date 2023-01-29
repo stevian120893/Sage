@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8D9962</color>
+    <color name="colorPrimaryDark">#C97554</color>
+    <color name="colorAccent">#292929</color>
+
+    <color name="gradient_grey_1">#F0F0F5</color>
+    <color name="gradient_grey_2">#F7F8FA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="semi_white">#F8F7F7</color>
+    <color name="red">#E04F5F</color>
+    <color name="red_bright">#FF0303</color>
+
+    <color name="textColorPrimary">#38475B</color>
+    <color name="textColorSecondary">#778390</color>
+    <color name="textColorThird">#BABFB6</color>
+    <color name="textColorGray">#9E9E9E</color>
+    <color name="colorGrayText">#808080</color>
+
+    <color name="blue_background">#E2E7FF</color>
+    <color name="activity_background">#F9F9F9</color>
+    <color name="grey_1">#9BA3AA</color>
+    <color name="colorGray1">#BEBEBE</color>
+    <color name="black">#000000</color>
+    <color name="colorGrayLine">#EDECEC</color>
+    <color name="yellow_rating">#FFC400</color>
+
+    <color name="color_status_waiting">#FFCC15</color>
+    <color name="color_status_canceled">#E04F5F</color>
+    <color name="color_status_approved">#22C73C</color>
+
+    <color name="color_bg_gray">#F2F2F2</color>
+</resources>

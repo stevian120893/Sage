@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="upload_image">Unggah gambar</string>
+    <string name="upload_image_via">Unggah gambar melalui..</string>
+    <string name="galery">Galeri</string>
+    <string name="camera">Kamera</string>
+</resources>
