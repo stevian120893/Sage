@@ -3,6 +3,7 @@ package com.mib.sage
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -22,6 +23,7 @@ class MainActivity : FragmentActivity() {
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         setContentView(R.layout.activity_main)
         setupNavGraph()
     }
