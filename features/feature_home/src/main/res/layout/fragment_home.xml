@@ -97,8 +97,7 @@
             android:drawableRight="@drawable/ic_next"
             android:paddingRight="@dimen/_8sdp"
             android:paddingLeft="@dimen/_12sdp"
-            android:drawableTint="@color/white"
-            android:visibility="gone"/>
+            android:drawableTint="@color/white"/>
 
         <Button
             android:id="@+id/btSignOut"

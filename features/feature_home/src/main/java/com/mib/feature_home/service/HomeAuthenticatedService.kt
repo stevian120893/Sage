@@ -11,6 +11,7 @@ import com.mib.feature_home.dto.response.AdminBankResponse
 import com.mib.feature_home.dto.response.AvailabilityDayResponse
 import com.mib.feature_home.dto.response.BuySubscriptionResponse
 import com.mib.feature_home.dto.response.CategoryResponse
+import com.mib.feature_home.dto.response.OrderResponse
 import com.mib.feature_home.dto.response.ProductResponse
 import com.mib.feature_home.dto.response.ProfileResponse
 import com.mib.feature_home.dto.response.PromoResponse
@@ -192,4 +193,9 @@ interface HomeAuthenticatedService {
         @Part stnkImage: MultipartBody.Part?,
         @Part skckImage: MultipartBody.Part?
     ): NetworkResponse<ApiResponse<Void>>
+
+    @GET("/order/list")
+    suspend fun getOrders(
+        @Query("page") cursor: String?
+    ): NetworkResponse<ApiResponse<List<OrderResponse>>>
 }

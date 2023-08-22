@@ -5,6 +5,7 @@ import com.mib.feature_home.domain.model.AdminBank
 import com.mib.feature_home.domain.model.AvailabilityDay
 import com.mib.feature_home.domain.model.BuySubscription
 import com.mib.feature_home.domain.model.CategoriesItemPaging
+import com.mib.feature_home.domain.model.OrderItemPaging
 import com.mib.feature_home.domain.model.ProductsItemPaging
 import com.mib.feature_home.domain.model.Profile
 import com.mib.feature_home.domain.model.PromosItemPaging
@@ -82,4 +83,8 @@ interface HomeWithAuthRepository {
         stnkImage: MultipartBody.Part?,
         skckImage: MultipartBody.Part?
     ): Pair<Void?, String?>
+
+    // order
+    suspend fun getOrders(cursor: String?): Pair<OrderItemPaging?, String?>
+//    suspend fun approveOrder(): Pair<OrderItemPaging?, String?>
 }

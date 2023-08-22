@@ -41,6 +41,15 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"/>
 
+            <TextView
+                android:id="@+id/tvNoData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shared_res_no_data"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:visibility="gone"/>
+
             <!--Shimmer-->
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/sflOrder"

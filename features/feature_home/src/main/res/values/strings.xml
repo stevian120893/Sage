@@ -20,6 +20,7 @@
 
 <!--    shared-->
     <string name="shared_res_save">Simpan</string>
+    <string name="shared_res_cancel">Batalkan</string>
     <string name="shared_res_failed_to_save">Gagal untuk menyimpan</string>
     <string name="shared_res_success_to_save">Berhasil menyimpan</string>
     <string name="shared_res_please_fill_blank_space">Harap lengkapi data yang tersedia</string>
@@ -96,6 +97,10 @@
     <string name="choose_subcategory_to_action">Pilih subkategori yang ingin anda tampilkan &amp; tambah</string>
 
 <!--    invoice-->
+    <string name="booking_code">Kode booking</string>
+    <string name="booking_date">Tanggal booking</string>
+    <string name="notes">Catatan</string>
+    <string name="payment_method">Metode pembayaran</string>
     <string name="choose_order_to_action">Pilih order yang ingin anda pakai</string>
     <string name="total_price">Total harga</string>
 

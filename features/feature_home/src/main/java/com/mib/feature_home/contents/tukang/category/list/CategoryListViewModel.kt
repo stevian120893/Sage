@@ -14,7 +14,6 @@ import com.mib.lib_coroutines.IODispatcher
 import com.mib.lib_coroutines.MainDispatcher
 import com.mib.lib_navigation.HomeNavigation
 import com.mib.lib_navigation.LoadingDialogNavigation
-import com.mib.lib_navigation.ProfileNavigation
 import com.mib.lib_navigation.UnauthorizedErrorNavigation
 import com.mib.lib_util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel

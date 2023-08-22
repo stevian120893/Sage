@@ -5,6 +5,7 @@ import com.mib.feature_home.domain.model.AdminBank
 import com.mib.feature_home.domain.model.AvailabilityDay
 import com.mib.feature_home.domain.model.BuySubscription
 import com.mib.feature_home.domain.model.CategoriesItemPaging
+import com.mib.feature_home.domain.model.OrderItemPaging
 import com.mib.feature_home.domain.model.ProductsItemPaging
 import com.mib.feature_home.domain.model.Profile
 import com.mib.feature_home.domain.model.PromosItemPaging
@@ -445,6 +446,26 @@ class HomeWithAuthRepositoryImpl(
             }
             else -> {
                 null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun getOrders(cursor: String?): Pair<OrderItemPaging, String?> {
+        val result = service.getOrders(cursor)
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val items = result.value.data?.map { it.toDomainModel() } ?: emptyList()
+                val nextCursor = result.value.meta?.nextCursor
+                OrderItemPaging(
+                    items,
+                    nextCursor
+                ) to null
+            }
+            else -> {
+                OrderItemPaging(
+                    emptyList(),
+                    null
+                ) to result.getErrorMessage()
             }
         }
     }
