@@ -53,15 +53,11 @@ class OrderActionViewModel @Inject constructor(
     private var subcategoryId: String? = null
 
     fun init(arg: Bundle?) {
-        subcategoryId = arg?.getString(KEY_SUBCATEGORY_CODE)
         state = state.copy(
-            productCode = arg?.getString(KEY_PRODUCT_CODE),
-            productName = arg?.getString(KEY_PRODUCT_NAME).orEmpty(),
-            productDescription = arg?.getString(KEY_PRODUCT_DESCRIPTION).orEmpty(),
-            productImage = arg?.getString(KEY_PRODUCT_IMAGE).orEmpty(),
-            productPrice = arg?.getString(KEY_PRODUCT_PRICE).orEmpty(),
-            productYearExperience = arg?.getInt(KEY_PRODUCT_YEAR_EXPERIENCE),
-            productStatus = arg?.getString(KEY_PRODUCT_STATUS).orEmpty()
+            bookingCode = arg?.getString(KEY_PRODUCT_CODE),
+            price = arg?.getString(KEY_PRODUCT_NAME).orEmpty(),
+            bookingDate = arg?.getString(KEY_PRODUCT_DESCRIPTION).orEmpty(),
+            note = arg?.getString(KEY_PRODUCT_IMAGE).orEmpty()
         )
     }
 
@@ -69,52 +65,52 @@ class OrderActionViewModel @Inject constructor(
         mediaEvent.postValue(fragment to easyImage)
     }
 
-    fun save(
-        fragment: Fragment,
-        productName: String,
-        productDescription: String,
-        price: String,
-        yearsOfExperience: String,
-        productImage: MultipartBody.Part?
-    ) {
-        if(!isFormValid(productName, productDescription, price, yearsOfExperience)) {
-            toastEvent.postValue(fragment.context?.getString(R.string.shared_res_please_fill_blank_space))
-            return
-        }
-
-        loadingDialogNavigation.show()
-        viewModelScope.launch(ioDispatcher) {
-            val result = addProductUseCase.invoke(
-                subcategoryId,
-                productName,
-                productDescription,
-                price.removeThousandSeparator(),
-                yearsOfExperience.replace(
-                    fragment.context?.getString(R.string.product_years).orEmpty(),
-                    ""
-                ).trim(),
-                productImage,
-                state.productCode,
-                if(state.productCode.isNullOrBlank()) ACTION_ADD else ACTION_EDIT
-            )
-
-            loadingDialogNavigation.dismiss()
-            withContext(mainDispatcher) {
-                result.first?.let {
-                    toastEvent.postValue(fragment.context?.getString(R.string.shared_res_success_to_save))
-                    goToProductListScreen(fragment.findNavController())
-                }
-                result.second?.let {
-                    toastEvent.postValue(it)
-                    if(it == ApiConstants.ERROR_MESSAGE_UNAUTHORIZED) {
-                        withContext(mainDispatcher) {
-                            unauthorizedErrorNavigation.handleErrorMessage(fragment.findNavController(), it)
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    fun save(
+//        fragment: Fragment,
+//        productName: String,
+//        productDescription: String,
+//        price: String,
+//        yearsOfExperience: String,
+//        productImage: MultipartBody.Part?
+//    ) {
+//        if(!isFormValid(productName, productDescription, price, yearsOfExperience)) {
+//            toastEvent.postValue(fragment.context?.getString(R.string.shared_res_please_fill_blank_space))
+//            return
+//        }
+//
+//        loadingDialogNavigation.show()
+//        viewModelScope.launch(ioDispatcher) {
+//            val result = addProductUseCase.invoke(
+//                subcategoryId,
+//                productName,
+//                productDescription,
+//                price.removeThousandSeparator(),
+//                yearsOfExperience.replace(
+//                    fragment.context?.getString(R.string.product_years).orEmpty(),
+//                    ""
+//                ).trim(),
+//                productImage,
+//                state.productCode,
+//                if(state.productCode.isNullOrBlank()) ACTION_ADD else ACTION_EDIT
+//            )
+//
+//            loadingDialogNavigation.dismiss()
+//            withContext(mainDispatcher) {
+//                result.first?.let {
+//                    toastEvent.postValue(fragment.context?.getString(R.string.shared_res_success_to_save))
+//                    goToProductListScreen(fragment.findNavController())
+//                }
+//                result.second?.let {
+//                    toastEvent.postValue(it)
+//                    if(it == ApiConstants.ERROR_MESSAGE_UNAUTHORIZED) {
+//                        withContext(mainDispatcher) {
+//                            unauthorizedErrorNavigation.handleErrorMessage(fragment.findNavController(), it)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     fun goToProductListScreen(navController: NavController) {
         homeNavigation.goToProductListScreen(navController = navController)
@@ -136,12 +132,9 @@ class OrderActionViewModel @Inject constructor(
     }
 
     data class ViewState(
-        var productCode: String? = null,
-        var productName: String? = null,
-        var productDescription: String? = null,
-        var productImage: String? = null,
-        var productPrice: String? = null,
-        var productYearExperience: Int? = null,
-        var productStatus: String? = null
+        var bookingCode: String? = null,
+        var price: String? = null,
+        var bookingDate: String? = null,
+        var note: String? = null,
     ) : BaseViewState
 }

@@ -49,6 +49,10 @@
         android:name="com.mib.feature_home.contents.order.list.OrderListFragment"
         android:label="OrderListFragment" />
     <fragment
+        android:id="@+id/orderActionFragment"
+        android:name="com.mib.feature_home.contents.order.action.OrderActionFragment"
+        android:label="OrderListFragment" />
+    <fragment
         android:id="@+id/subscriptionFragment"
         android:name="com.mib.feature_home.contents.subscription.SubscriptionFragment"
         android:label="SubscriptionFragment" />
@@ -121,6 +125,9 @@
     <action
         android:id="@+id/action_order_list_fragment"
         app:destination="@id/orderListFragment" />
+    <action
+        android:id="@+id/action_order_action_fragment"
+        app:destination="@id/orderActionFragment" />
     <action
         android:id="@+id/action_subscription_fragment"
         app:destination="@id/subscriptionFragment" />

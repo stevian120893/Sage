@@ -97,12 +97,12 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
     }
 
     private fun observeLiveData(context: Context) {
-        viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
-            state.productCode?.let {
-                binding.etBookingCode.setText(state.productName)
-                binding.etPrice.setText(state.productPrice?.withThousandSeparator())
-            }
-        }
+//        viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
+//            state.productCode?.let {
+//                binding.etBookingCode.setText(state.productName)
+//                binding.etPrice.setText(state.productPrice?.withThousandSeparator())
+//            }
+//        }
     }
 
     companion object {

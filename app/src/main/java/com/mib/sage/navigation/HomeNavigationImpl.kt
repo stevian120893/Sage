@@ -2,6 +2,10 @@ package com.mib.sage.navigation
 
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_CODE
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_DATE
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_NOTE
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_PRICE
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_CODE
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_DESCRIPTION
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_IMAGE
@@ -86,6 +90,24 @@ class HomeNavigationImpl : HomeNavigation {
 
     override fun goToOrderListScreen(navController: NavController) {
         navController.navigate(R.id.action_order_list_fragment)
+    }
+
+    override fun goToOrderActionScreen(
+        navController: NavController,
+        bookingCode: String,
+        price: String,
+        bookingDate: String,
+        note: String
+    ) {
+        navController.navigate(
+            R.id.action_order_action_fragment,
+            bundleOf(
+                KEY_ORDER_BOOKING_CODE to bookingCode,
+                KEY_ORDER_BOOKING_PRICE to price,
+                KEY_ORDER_BOOKING_DATE to bookingDate,
+                KEY_ORDER_BOOKING_NOTE to note,
+            )
+        )
     }
 
     override fun goToSubscriptionScreen(navController: NavController) {

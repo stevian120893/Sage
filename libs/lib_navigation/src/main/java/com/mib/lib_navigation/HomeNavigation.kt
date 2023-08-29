@@ -19,6 +19,13 @@ interface HomeNavigation {
     fun goToProductListScreen(navController: NavController)
     fun goToSendInvoiceScreen(navController: NavController)
     fun goToOrderListScreen(navController: NavController)
+    fun goToOrderActionScreen(
+        navController: NavController,
+        bookingCode: String,
+        price: String,
+        bookingDate: String,
+        note: String
+    )
     fun goToSubscriptionScreen(navController: NavController)
     fun goToPromoListScreen(navController: NavController)
     fun goToCategoryListScreen(navController: NavController)

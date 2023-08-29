@@ -71,7 +71,23 @@ class OrderListViewModel @Inject constructor(
         fragment: Fragment,
         item: Order
     ) {
-//        goToAddProductScreen(fragment, item)
+        goToOrderActionScreen(fragment.findNavController(), item)
+    }
+
+    private fun goToOrderActionScreen(
+        navController: NavController,
+        item: Order
+    ) {
+        val priceString = item.totalPayment.toString()
+        if(item.code != null && priceString != "") {
+            homeNavigation.goToOrderActionScreen(
+                navController = navController,
+                bookingCode = item.code,
+                price = priceString,
+                bookingDate = item.bookingDate,
+                note = item.note
+            )
+        } else { }
     }
 
     data class ViewState(

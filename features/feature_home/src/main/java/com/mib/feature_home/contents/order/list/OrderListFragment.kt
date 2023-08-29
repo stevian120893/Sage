@@ -133,6 +133,11 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
     }
 
     companion object {
+        const val KEY_ORDER_BOOKING_CODE = "order_booking_code"
+        const val KEY_ORDER_BOOKING_PRICE = "order_booking_price"
+        const val KEY_ORDER_BOOKING_DATE = "order_booking_date"
+        const val KEY_ORDER_BOOKING_NOTE = "order_booking_note"
+
         private const val MAX_PAGINATION_ITEMS = 10
         private const val DEFAULT_NEXT_CURSOR_REQUEST = "1"
         private const val DEFAULT_NEXT_CURSOR_RESPONSE = 2
