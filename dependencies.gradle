@@ -46,7 +46,7 @@ ext {
             jsonAssert                   : '1.5.0',
             junit                        : '4.13',
             junit5                       : '5.6.2',
-            kotlin                       : '1.5.31',
+            kotlin                       : '1.6.21',
             kotlinCoroutines             : '1.5.0',
             lifecycle                    : '2.3.1',
             lottie                       : '2.8.0',

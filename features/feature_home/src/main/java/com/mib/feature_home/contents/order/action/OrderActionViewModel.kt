@@ -6,6 +6,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.mib.feature_home.R
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_CODE
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_DATE
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_NOTE
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_PRICE
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_CODE
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_DESCRIPTION
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_IMAGE
@@ -54,10 +58,10 @@ class OrderActionViewModel @Inject constructor(
 
     fun init(arg: Bundle?) {
         state = state.copy(
-            bookingCode = arg?.getString(KEY_PRODUCT_CODE),
-            price = arg?.getString(KEY_PRODUCT_NAME).orEmpty(),
-            bookingDate = arg?.getString(KEY_PRODUCT_DESCRIPTION).orEmpty(),
-            note = arg?.getString(KEY_PRODUCT_IMAGE).orEmpty()
+            bookingCode = arg?.getString(KEY_ORDER_BOOKING_CODE),
+            price = arg?.getString(KEY_ORDER_BOOKING_PRICE).orEmpty(),
+            bookingDate = arg?.getString(KEY_ORDER_BOOKING_DATE).orEmpty(),
+            note = arg?.getString(KEY_ORDER_BOOKING_NOTE).orEmpty()
         )
     }
 

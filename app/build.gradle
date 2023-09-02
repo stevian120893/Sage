@@ -9,7 +9,7 @@ apply from: "$rootDir/gradle_scripts/param.gradle"
 //apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
-    compileSdk builds.compileSdk
+    compileSdkVersion builds.compileSdk
 
     defaultConfig {
         manifestPlaceholders
