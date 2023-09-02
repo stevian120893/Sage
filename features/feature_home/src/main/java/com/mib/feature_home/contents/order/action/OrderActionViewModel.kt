@@ -18,6 +18,8 @@ import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Compa
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_STATUS
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_PRODUCT_YEAR_EXPERIENCE
 import com.mib.feature_home.contents.tukang.product.add.AddProductFragment.Companion.KEY_SUBCATEGORY_CODE
+import com.mib.feature_home.domain.model.Category
+import com.mib.feature_home.domain.model.PaymentMethod
 import com.mib.feature_home.usecase.AddCategoryUseCase.Companion.ACTION_ADD
 import com.mib.feature_home.usecase.AddCategoryUseCase.Companion.ACTION_EDIT
 import com.mib.feature_home.usecase.AddProductUseCase
@@ -61,7 +63,12 @@ class OrderActionViewModel @Inject constructor(
             bookingCode = arg?.getString(KEY_ORDER_BOOKING_CODE),
             price = arg?.getString(KEY_ORDER_BOOKING_PRICE).orEmpty(),
             bookingDate = arg?.getString(KEY_ORDER_BOOKING_DATE).orEmpty(),
-            note = arg?.getString(KEY_ORDER_BOOKING_NOTE).orEmpty()
+            note = arg?.getString(KEY_ORDER_BOOKING_NOTE).orEmpty(),
+            paymentMethod = listOf(
+                PaymentMethod("Dana", "DANA"),
+                PaymentMethod("Transfer", "TRANSFER"),
+                PaymentMethod("Cash", "CASH")
+            )
         )
     }
 
@@ -116,8 +123,8 @@ class OrderActionViewModel @Inject constructor(
 //        }
 //    }
 
-    fun goToProductListScreen(navController: NavController) {
-        homeNavigation.goToProductListScreen(navController = navController)
+    fun goToOrderListScreen(navController: NavController) {
+        homeNavigation.goToOrderListScreen(navController = navController)
     }
 
     private fun goToHomeScreen(navController: NavController) {
@@ -140,5 +147,6 @@ class OrderActionViewModel @Inject constructor(
         var price: String? = null,
         var bookingDate: String? = null,
         var note: String? = null,
+        var paymentMethod: List<PaymentMethod>? = null,
     ) : BaseViewState
 }

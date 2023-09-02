@@ -51,8 +51,9 @@ class OrdersAdapter(
     ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(order: Order) {
 //            Glide.with(context).load(promo.promoImageUrl).into(itemBinding.ivPromoImage)
-            itemBinding.tvOrderTitle.text = order.code
-            itemBinding.tvOrderDesc.text = order.status
+            itemBinding.tvDate.text = order.bookingDate
+            itemBinding.tvBookingCode.text = order.code
+            itemBinding.tvStatus.text = order.status
 
             itemBinding.llAdapterParent.setOnClickListener {
                 adapterListener.onClick(order)

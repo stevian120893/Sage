@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.mib.feature_home.databinding.FragmentOrderActionBinding
+import com.mib.feature_home.domain.model.Category
+import com.mib.feature_home.domain.model.PaymentMethod
 import com.mib.feature_home.utils.NumberTextWatcher
 import com.mib.feature_home.utils.createEasyImage
 import com.mib.feature_home.utils.withThousandSeparator
@@ -29,9 +33,11 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            viewModel.goToProductListScreen(findNavController())
+            viewModel.goToOrderListScreen(findNavController())
         }
     }
+
+    private var paymentMethodAdapter: ArrayAdapter<String>? = null
 
     override fun initViewModel(firstInit: Boolean) {
         setViewModel(OrderActionViewModel::class.java)
@@ -68,7 +74,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
     }
 
     private fun initListener() {
-        binding.btSave.setOnClickListener {
+        binding.btSendInvoice.setOnClickListener {
 //            viewModel.save(
 //                fragment = this,
 //                productName = binding.etProductName.text.toString(),
@@ -91,7 +97,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
         }
 
         binding.ivBack.setOnClickListener {
-            viewModel.goToProductListScreen(findNavController())
+            viewModel.goToOrderListScreen(findNavController())
         }
         binding.etPrice.addTextChangedListener(NumberTextWatcher(binding.etPrice))
     }
@@ -103,6 +109,24 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                 binding.etPrice.setText(state.price?.withThousandSeparator())
                 binding.etBookingDate.setText(state.bookingDate)
                 binding.etNotes.setText(state.note)
+                paymentMethodAdapter = ArrayAdapter<String>(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    state.paymentMethod?.map { it.name } ?: emptyList()
+                )
+                paymentMethodAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.snPaymentMethod.adapter = paymentMethodAdapter
+                setPaymentMethodSpinnerListener(state.paymentMethod)
+            }
+        }
+    }
+
+    private fun setPaymentMethodSpinnerListener(paymentMethod: List<PaymentMethod>?) {
+        binding.snPaymentMethod.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                viewModel.updateSelectedCategory(categories?.get(position)?.categoryId.orEmpty())
+//                viewModel.getSubcategories(this@ProductListFragment)
             }
         }
     }

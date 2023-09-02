@@ -47,6 +47,7 @@
     <string name="shared_res_yes_logout">Ya, keluar</string>
     <string name="shared_res_back">Kembali</string>
     <string name="shared_res_whatsapp_number">085882411322</string>
+    <string name="shared_res_status">Status</string>
 
 <!--    profile-->
     <string name="profile_upload_profile_picture">Unggah Foto Profil</string>
