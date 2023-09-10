@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/booking_code"
             style="@style/Regular14"
+            android:enabled="false"
             android:inputType="textCapSentences"
             android:layout_marginTop="@dimen/_2sdp"/>
 

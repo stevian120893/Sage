@@ -15,7 +15,9 @@ import com.mib.feature_home.domain.model.SubscriptionType
 import com.mib.feature_home.domain.model.UserSubscription
 import com.mib.feature_home.dto.request.AddCategoryRequest
 import com.mib.feature_home.dto.request.AddSubcategoryRequest
+import com.mib.feature_home.dto.request.ApproveOrderRequest
 import com.mib.feature_home.dto.request.AvailabilityDayRequest
+import com.mib.feature_home.dto.request.CancelDoneOrderRequest
 import com.mib.feature_home.mapper.toDomainModel
 import com.mib.feature_home.service.HomeAuthenticatedService
 import com.mib.feature_home.usecase.AddCategoryUseCase.Companion.ACTION_ADD
@@ -466,6 +468,66 @@ class HomeWithAuthRepositoryImpl(
                     emptyList(),
                     null
                 ) to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun approveOrder(
+        code: String,
+        paymentMethod: String,
+        price: String,
+        bookingDate: String,
+        note: String
+    ): Pair<Void?, String?> {
+        val approveOrderRequest = ApproveOrderRequest(
+            code = code,
+            paymentMethod = paymentMethod,
+            price = price,
+            bookingDate = bookingDate,
+            note = note,
+        )
+
+        val result = service.approveOrder(approveOrderRequest)
+
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun cancelOrder(code: String): Pair<Void?, String?> {
+        val cancelDoneOrderRequest = CancelDoneOrderRequest(code = code)
+
+        val result = service.cancelOrder(cancelDoneOrderRequest)
+
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun doneOrder(code: String): Pair<Void?, String?> {
+        val cancelDoneOrderRequest = CancelDoneOrderRequest(code = code)
+
+        val result = service.doneOrder(cancelDoneOrderRequest)
+
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
             }
         }
     }

@@ -7,7 +7,10 @@ import com.mib.feature_home.usecase.AddCategoryUseCase
 import com.mib.feature_home.usecase.AddProductUseCase
 import com.mib.feature_home.usecase.AddPromoUseCase
 import com.mib.feature_home.usecase.AddSubcategoryUseCase
+import com.mib.feature_home.usecase.ApproveOrderUseCase
 import com.mib.feature_home.usecase.BuySubscriptionUseCase
+import com.mib.feature_home.usecase.CancelOrderUseCase
+import com.mib.feature_home.usecase.DoneOrderUseCase
 import com.mib.feature_home.usecase.GetAdditionalDataUseCase
 import com.mib.feature_home.usecase.GetAvailabilityDaysUseCase
 import com.mib.feature_home.usecase.GetBankInfoUseCase
@@ -162,5 +165,20 @@ object HomeUseCaseModule {
     @Provides
     fun provideGetOrdersUseCase(repo: HomeWithAuthRepository): GetOrdersUseCase {
         return GetOrdersUseCase(repo)
+    }
+
+    @Provides
+    fun provideApproveOrdersUseCase(repo: HomeWithAuthRepository): ApproveOrderUseCase {
+        return ApproveOrderUseCase(repo)
+    }
+
+    @Provides
+    fun provideCancelOrdersUseCase(repo: HomeWithAuthRepository): CancelOrderUseCase {
+        return CancelOrderUseCase(repo)
+    }
+
+    @Provides
+    fun provideDoneOrdersUseCase(repo: HomeWithAuthRepository): DoneOrderUseCase {
+        return DoneOrderUseCase(repo)
     }
 }

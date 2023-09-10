@@ -4,7 +4,9 @@ import com.mib.feature_home.dto.request.AddCategoryRequest
 import com.mib.feature_home.dto.request.AddProductRequest
 import com.mib.feature_home.dto.request.AddPromoRequest
 import com.mib.feature_home.dto.request.AddSubcategoryRequest
+import com.mib.feature_home.dto.request.ApproveOrderRequest
 import com.mib.feature_home.dto.request.AvailabilityDayRequest
+import com.mib.feature_home.dto.request.CancelDoneOrderRequest
 import com.mib.feature_home.dto.request.SetAvailabilityRequest
 import com.mib.feature_home.dto.response.AdditionalDataResponse
 import com.mib.feature_home.dto.response.AdminBankResponse
@@ -198,4 +200,19 @@ interface HomeAuthenticatedService {
     suspend fun getOrders(
         @Query("page") cursor: String?
     ): NetworkResponse<ApiResponse<List<OrderResponse>>>
+
+    @POST("/order/approve")
+    suspend fun approveOrder(
+        @Body body: ApproveOrderRequest
+    ): NetworkResponse<ApiResponse<Void>>
+
+    @POST("/order/cancel")
+    suspend fun cancelOrder(
+        @Body body: CancelDoneOrderRequest
+    ): NetworkResponse<ApiResponse<Void>>
+
+    @POST("/order/done")
+    suspend fun doneOrder(
+        @Body body: CancelDoneOrderRequest
+    ): NetworkResponse<ApiResponse<Void>>
 }

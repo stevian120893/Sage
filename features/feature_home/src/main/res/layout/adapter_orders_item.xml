@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/white"
-    android:padding="@dimen/_10sdp"
-    android:layout_marginBottom="@dimen/_8sdp">
+    android:background="@color/white">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Regular12"
+        style="@style/Regular12Gray"
         android:text="@string/booking_date"
         android:layout_marginTop="@dimen/_1sdp"/>
     <TextView
@@ -26,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Regular12"
+        style="@style/Regular12Gray"
         android:text="@string/booking_code"
         android:layout_marginTop="@dimen/_6sdp"/>
     <TextView
@@ -40,7 +38,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Regular12"
+        style="@style/Regular12Gray"
         android:text="@string/shared_res_status"
         android:layout_marginTop="@dimen/_6sdp"/>
     <TextView
@@ -50,5 +48,12 @@
         style="@style/Medium16"
         android:text="-"
         android:layout_marginTop="@dimen/_2sdp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"/>
 
 </LinearLayout>

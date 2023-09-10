@@ -104,6 +104,9 @@
     <string name="payment_method">Metode pembayaran</string>
     <string name="choose_order_to_action">Pilih order yang ingin anda pakai</string>
     <string name="total_price">Total harga</string>
+    <string name="payment_method_dana">Dana</string>
+    <string name="payment_method_transfer">Transfer</string>
+    <string name="payment_method_cash">Cash</string>
 
 <!--    subscription-->
     <string name="subscription_expired_date">Langganan Anda akan berakhir pada tanggal %s\nSilahkan lakukan perpanjangan dibawah ini.</string>

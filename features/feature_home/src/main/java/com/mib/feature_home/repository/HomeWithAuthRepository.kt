@@ -86,5 +86,19 @@ interface HomeWithAuthRepository {
 
     // order
     suspend fun getOrders(cursor: String?): Pair<OrderItemPaging?, String?>
-//    suspend fun approveOrder(): Pair<OrderItemPaging?, String?>
+    suspend fun approveOrder(
+        code: String,
+        paymentMethod: String,
+        price: String,
+        bookingDate: String,
+        note: String
+    ): Pair<Void?, String?>
+
+    suspend fun cancelOrder(
+        code: String
+    ): Pair<Void?, String?>
+
+    suspend fun doneOrder(
+        code: String
+    ): Pair<Void?, String?>
 }

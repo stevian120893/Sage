@@ -11,25 +11,18 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.mib.feature_home.databinding.FragmentOrderActionBinding
-import com.mib.feature_home.domain.model.Category
 import com.mib.feature_home.domain.model.PaymentMethod
 import com.mib.feature_home.utils.NumberTextWatcher
-import com.mib.feature_home.utils.createEasyImage
 import com.mib.feature_home.utils.withThousandSeparator
 import com.mib.lib.mvvm.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
-import pl.aprilapps.easyphotopicker.EasyImage
 
 @AndroidEntryPoint
 class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     private var _binding: FragmentOrderActionBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var easyImage: EasyImage
-    private var productImage: MultipartBody.Part? = null
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -41,7 +34,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     override fun initViewModel(firstInit: Boolean) {
         setViewModel(OrderActionViewModel::class.java)
-        viewModel.init(arguments)
+        viewModel.init(arguments, this@OrderActionFragment)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +53,6 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        easyImage = createEasyImage(view.context)
         viewModel.loadingDialogNavigation.subscribe(this, false)
         lifecycleScope.launch {
             initListener()
@@ -75,25 +67,11 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     private fun initListener() {
         binding.btSendInvoice.setOnClickListener {
-//            viewModel.save(
-//                fragment = this,
-//                productName = binding.etProductName.text.toString(),
-//                productDescription = binding.etDescription.text.toString(),
-//                price = binding.etPrice.text.toString(),
-//                yearsOfExperience = binding.etYearsOfExperience.text.toString(),
-//                productImage = productImage
-//            )
+            viewModel.approveOrder(fragment = this)
         }
 
         binding.btCancel.setOnClickListener {
-//            viewModel.save(
-//                fragment = this,
-//                productName = binding.etProductName.text.toString(),
-//                productDescription = binding.etDescription.text.toString(),
-//                price = binding.etPrice.text.toString(),
-//                yearsOfExperience = binding.etYearsOfExperience.text.toString(),
-//                productImage = productImage
-//            )
+            viewModel.cancelOrder(fragment = this)
         }
 
         binding.ivBack.setOnClickListener {
@@ -125,13 +103,14 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
         binding.snPaymentMethod.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                viewModel.updateSelectedCategory(categories?.get(position)?.categoryId.orEmpty())
-//                viewModel.getSubcategories(this@ProductListFragment)
+                viewModel.updateSelectedPaymentMethod(paymentMethod?.get(position)?.code.orEmpty())
             }
         }
     }
 
     companion object {
-        const val KEY_ORDER_CODE = "order_code"
+        const val KEY_PAYMENT_METHOD_DANA = "DANA"
+        const val KEY_PAYMENT_METHOD_CASH = "CASH"
+        const val KEY_PAYMENT_METHOD_TRANSFER = "TRANSFER"
     }
 }
