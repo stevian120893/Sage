@@ -9,6 +9,7 @@ import com.mib.feature_home.R
 import com.mib.feature_home.databinding.AdapterLoadingItemBinding
 import com.mib.feature_home.databinding.AdapterOrdersItemBinding
 import com.mib.feature_home.domain.model.Order
+import com.mib.feature_home.utils.CustomUtils
 import java.math.BigDecimal
 
 class OrdersAdapter(
@@ -53,7 +54,7 @@ class OrdersAdapter(
 //            Glide.with(context).load(promo.promoImageUrl).into(itemBinding.ivPromoImage)
             itemBinding.tvDate.text = order.bookingDate
             itemBinding.tvBookingCode.text = order.code
-            itemBinding.tvStatus.text = order.status
+            itemBinding.tvStatus.text = CustomUtils.getUserFriendlyOrderStatusName(context, order.status)
 
             itemBinding.llAdapterParent.setOnClickListener {
                 adapterListener.onClick(order)

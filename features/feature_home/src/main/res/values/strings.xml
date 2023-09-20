@@ -48,6 +48,12 @@
     <string name="shared_res_back">Kembali</string>
     <string name="shared_res_whatsapp_number">085882411322</string>
     <string name="shared_res_status">Status</string>
+    <string name="shared_res_status_negotiating">Dalam penawaran</string>
+    <string name="shared_res_status_waiting_for_payment">Menunggu pembayaran</string>
+    <string name="shared_res_status_ongoing">Sedang dikerjakan</string>
+    <string name="shared_res_status_cancel">Dibatalkan</string>
+    <string name="shared_res_status_done">Selesai</string>
+    <string name="shared_res_status_unknown">Tidak diketahui</string>
 
 <!--    profile-->
     <string name="profile_upload_profile_picture">Unggah Foto Profil</string>

@@ -10,9 +10,9 @@ class OrderResponse (
     @SerializedName("status")
     val status: String?,
     @SerializedName("order_date")
-    val orderDate: String?,
+    val orderDate: Long?,
     @SerializedName("booking_date")
-    val bookingDate: String?,
+    val bookingDate: Long?,
     @SerializedName("total_payment")
     val totalPayment: String?,
     @SerializedName("note")
