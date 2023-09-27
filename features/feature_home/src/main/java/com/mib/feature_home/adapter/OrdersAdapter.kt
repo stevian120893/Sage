@@ -54,6 +54,7 @@ class OrdersAdapter(
 //            Glide.with(context).load(promo.promoImageUrl).into(itemBinding.ivPromoImage)
             itemBinding.tvDate.text = order.bookingDate
             itemBinding.tvBookingCode.text = order.code
+            itemBinding.tvCustomerName.text = order.code
             itemBinding.tvStatus.text = CustomUtils.getUserFriendlyOrderStatusName(context, order.status)
 
             itemBinding.llAdapterParent.setOnClickListener {

@@ -39,6 +39,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Regular12Gray"
+        android:text="@string/customer_name"
+        android:layout_marginTop="@dimen/_6sdp"/>
+    <TextView
+        android:id="@+id/tvCustomerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Medium16"
+        android:text="-"
+        android:layout_marginTop="@dimen/_2sdp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Regular12Gray"
         android:text="@string/shared_res_status"
         android:layout_marginTop="@dimen/_6sdp"/>
     <TextView

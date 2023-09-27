@@ -105,6 +105,7 @@
 
 <!--    invoice-->
     <string name="booking_code">Kode booking</string>
+    <string name="customer_name">Nama pelanggan</string>
     <string name="booking_date">Tanggal booking</string>
     <string name="notes">Catatan</string>
     <string name="payment_method">Metode pembayaran</string>
