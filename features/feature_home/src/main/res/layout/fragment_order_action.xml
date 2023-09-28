@@ -1,131 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ResourceName">
-    <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="ResourceName"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_16sdp">
+        android:layout_marginTop="@dimen/_12sdp"
+        android:paddingRight="@dimen/_16sdp"
+        android:paddingLeft="@dimen/_16sdp">
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_back"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/ic_back"/>
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/ic_icon"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
-            <ImageView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:src="@drawable/ic_icon"
-                android:layout_centerHorizontal="true"/>
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Regular10Gray"
-            android:text="@string/booking_code"
-            android:layout_marginTop="@dimen/_16sdp"/>
-        <EditText
-            android:id="@+id/etBookingCode"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/llContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/booking_code"
-            style="@style/Regular14"
-            android:enabled="false"
-            android:inputType="textCapSentences"
-            android:layout_marginTop="@dimen/_2sdp"/>
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Regular10Gray"
-            android:text="@string/payment_method"
-            android:layout_marginTop="@dimen/_16sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular10Gray"
+                android:text="@string/booking_code"
+                android:layout_marginTop="@dimen/_16sdp"/>
+            <EditText
+                android:id="@+id/etBookingCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/booking_code"
+                style="@style/Regular14"
+                android:enabled="false"
+                android:inputType="textCapSentences"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular10Gray"
+                android:text="@string/payment_method"
+                android:layout_marginTop="@dimen/_16sdp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_stroke_6"
+                android:backgroundTint="@color/textColorGray"
+                android:layout_marginTop="@dimen/_2sdp">
+                <Spinner
+                    android:id="@+id/snPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Regular14"
+                    android:padding="@dimen/_8sdp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular10Gray"
+                android:text="@string/product_price"
+                android:layout_marginTop="@dimen/_16sdp"/>
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/product_price"
+                style="@style/Regular14"
+                android:inputType="number"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular10Gray"
+                android:text="@string/booking_date"
+                android:layout_marginTop="@dimen/_16sdp"/>
+            <EditText
+                android:id="@+id/etBookingDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/booking_date"
+                style="@style/Regular14"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular10Gray"
+                android:text="@string/notes"
+                android:layout_marginTop="@dimen/_16sdp"/>
+            <EditText
+                android:id="@+id/etNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/notes"
+                style="@style/Regular14"
+                android:inputType="textCapSentences"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <Button
+                android:id="@+id/btDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_6"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/done_order"
+                style="@style/ButtonText"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_30sdp"/>
+
+            <Button
+                android:id="@+id/btSendInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_6"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/home_menu_send_invoice"
+                android:visibility="gone"
+                style="@style/ButtonText"
+                android:layout_marginTop="@dimen/_30sdp"/>
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_6"
+                android:backgroundTint="@color/red"
+                android:text="@string/shared_res_cancel"
+                style="@style/ButtonText"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_16sdp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--Shimmer-->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/sflProductDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shimmer_duration="1500"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:visibility="gone">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_rounded_stroke_6"
-            android:backgroundTint="@color/textColorGray"
-            android:layout_marginTop="@dimen/_2sdp">
-            <Spinner
-                android:id="@+id/snPaymentMethod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Regular14"
-                android:padding="@dimen/_8sdp"/>
+            android:orientation="vertical">
+            <include layout="@layout/shimmer_product_detail" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Regular10Gray"
-            android:text="@string/product_price"
-            android:layout_marginTop="@dimen/_16sdp"/>
-        <EditText
-            android:id="@+id/etPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/product_price"
-            style="@style/Regular14"
-            android:inputType="number"
-            android:layout_marginTop="@dimen/_2sdp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Regular10Gray"
-            android:text="@string/booking_date"
-            android:layout_marginTop="@dimen/_16sdp"/>
-        <EditText
-            android:id="@+id/etBookingDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/booking_date"
-            style="@style/Regular14"
-            android:layout_marginTop="@dimen/_2sdp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Regular10Gray"
-            android:text="@string/notes"
-            android:layout_marginTop="@dimen/_16sdp"/>
-        <EditText
-            android:id="@+id/etNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/notes"
-            style="@style/Regular14"
-            android:inputType="textCapSentences"
-            android:layout_marginTop="@dimen/_2sdp"/>
-
-        <Button
-            android:id="@+id/btSendInvoice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_rounded_6"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/home_menu_send_invoice"
-            style="@style/ButtonText"
-            android:layout_marginTop="@dimen/_30sdp"/>
-
-        <Button
-            android:id="@+id/btCancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_rounded_6"
-            android:backgroundTint="@color/red"
-            android:text="@string/shared_res_cancel"
-            style="@style/ButtonText"
-            android:layout_marginTop="@dimen/_16sdp"/>
-    </LinearLayout>
-</ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</LinearLayout>

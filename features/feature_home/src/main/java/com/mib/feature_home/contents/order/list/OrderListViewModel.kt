@@ -13,7 +13,6 @@ import com.mib.lib_api.ApiConstants
 import com.mib.lib_coroutines.IODispatcher
 import com.mib.lib_coroutines.MainDispatcher
 import com.mib.lib_navigation.HomeNavigation
-import com.mib.lib_navigation.LoadingDialogNavigation
 import com.mib.lib_navigation.ProfileNavigation
 import com.mib.lib_navigation.UnauthorizedErrorNavigation
 import com.mib.lib_util.SingleLiveEvent
@@ -28,7 +27,6 @@ class OrderListViewModel @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineContext,
     @MainDispatcher private val mainDispatcher: CoroutineContext,
     private val getOrdersUseCase: GetOrdersUseCase,
-    val loadingDialog: LoadingDialogNavigation,
     private val homeNavigation: HomeNavigation,
     private val unauthorizedErrorNavigation: UnauthorizedErrorNavigation,
     private val profileNavigation: ProfileNavigation
@@ -37,16 +35,14 @@ class OrderListViewModel @Inject constructor(
     override val toastEvent: SingleLiveEvent<String> = SingleLiveEvent()
 
     fun fetchOrders(fragment: Fragment, nextCursor: String? = null) {
-        loadingDialog.show()
+        state = state.copy(isLoadHistory = true)
         viewModelScope.launch(ioDispatcher) {
-            val result = getOrdersUseCase(
-                cursor = nextCursor
-            )
-            loadingDialog.dismiss()
+            val result = getOrdersUseCase(nextCursor)
 
             withContext(mainDispatcher) {
                 result.first?.items.let {
                     state = state.copy(
+                        isLoadHistory = false,
                         event = EVENT_UPDATE_ORDERS,
                         orderItemPaging = result.first
                     )
@@ -92,6 +88,7 @@ class OrderListViewModel @Inject constructor(
 
     data class ViewState(
         var event: Int? = null,
+        var isLoadHistory: Boolean = false,
         var orderItemPaging: OrderItemPaging? = null
     ) : BaseViewState
 

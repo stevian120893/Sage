@@ -159,4 +159,7 @@
     <string name="upload_sim">Unggah SIM</string>
     <string name="upload_stnk">Unggah STNK</string>
     <string name="upload_skck">Unggah SKCK</string>
+
+<!--    order-->
+    <string name="done_order">Pesanan Selesai</string>
 </resources>

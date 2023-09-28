@@ -17,6 +17,7 @@ import com.mib.feature_home.usecase.GetBankInfoUseCase
 import com.mib.feature_home.usecase.GetBanksUseCase
 import com.mib.feature_home.usecase.GetCategoriesUseCase
 import com.mib.feature_home.usecase.GetLocationsUseCase
+import com.mib.feature_home.usecase.GetOrderDetailUseCase
 import com.mib.feature_home.usecase.GetOrdersUseCase
 import com.mib.feature_home.usecase.GetProductsUseCase
 import com.mib.feature_home.usecase.GetProfileUseCase
@@ -180,5 +181,10 @@ object HomeUseCaseModule {
     @Provides
     fun provideDoneOrdersUseCase(repo: HomeWithAuthRepository): DoneOrderUseCase {
         return DoneOrderUseCase(repo)
+    }
+
+    @Provides
+    fun provideGetOrderDetailUseCase(repo: HomeWithAuthRepository): GetOrderDetailUseCase {
+        return GetOrderDetailUseCase(repo)
     }
 }

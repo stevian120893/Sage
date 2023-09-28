@@ -13,6 +13,7 @@ import com.mib.feature_home.domain.model.SubcategoriesItemPaging
 import com.mib.feature_home.domain.model.SubscriptionOrdersItemPaging
 import com.mib.feature_home.domain.model.SubscriptionType
 import com.mib.feature_home.domain.model.UserSubscription
+import com.mib.feature_home.domain.model.order_detail.OrderDetail
 import okhttp3.MultipartBody
 
 interface HomeWithAuthRepository {
@@ -101,4 +102,8 @@ interface HomeWithAuthRepository {
     suspend fun doneOrder(
         code: String
     ): Pair<Void?, String?>
+
+    suspend fun getOrderDetail(
+        orderId: String
+    ): Pair<OrderDetail?, String?>
 }

@@ -13,6 +13,7 @@ import com.mib.feature_home.domain.model.SubcategoriesItemPaging
 import com.mib.feature_home.domain.model.SubscriptionOrdersItemPaging
 import com.mib.feature_home.domain.model.SubscriptionType
 import com.mib.feature_home.domain.model.UserSubscription
+import com.mib.feature_home.domain.model.order_detail.OrderDetail
 import com.mib.feature_home.dto.request.AddCategoryRequest
 import com.mib.feature_home.dto.request.AddSubcategoryRequest
 import com.mib.feature_home.dto.request.ApproveOrderRequest
@@ -524,6 +525,18 @@ class HomeWithAuthRepositoryImpl(
         return when (result) {
             is NetworkResponse.Success -> {
                 val item = result.value.data
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun getOrderDetail(orderId: String): Pair<OrderDetail?, String?> {
+        return when (val result = service.getOrderDetail(orderId)) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data?.toDomainModel()
                 item to null
             }
             else -> {

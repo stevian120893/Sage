@@ -34,7 +34,7 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchOrders(this)
+        viewModel.fetchOrders(this, DEFAULT_NEXT_CURSOR_REQUEST)
     }
 
     override fun onCreateView(
@@ -81,42 +81,86 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
         binding.ivBack.setOnClickListener {
             viewModel.goToHomeScreen(findNavController())
         }
+
+        binding.srlOrder.setOnRefreshListener {
+            viewModel.fetchOrders(this@OrderListFragment, DEFAULT_NEXT_CURSOR_REQUEST)
+        }
+
+        binding.tvNoData.setOnClickListener {
+            viewModel.fetchOrders(this)
+        }
     }
 
     private fun observeLiveData(context: Context) {
         viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
-            when (state.event) {
-                EVENT_UPDATE_ORDERS -> {
-                    state.orderItemPaging?.let { item ->
-                        if(item.items?.isNotEmpty() == true) {
-                            binding.rvOrder.visibility = View.VISIBLE
-                            binding.tvNoData.visibility = View.GONE
-                            nextCursor = item.nextCursor
-                            val hasMoreItem = item.nextCursor != null
-                            if(hasMoreItem) {
-                                val cursor = nextCursor?.toInt() ?: -1
-                                if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
-                                    ordersAdapter?.removeLoadingFooter()
-                                    ordersAdapter?.addList(item.items.toMutableList())
-                                    isLoadNextItem = false
-                                } else { // first fetch
-                                    setupAdapter(context, item.items)
-                                }
-                            } else {
-                                if(isLoadNextItem) {
-                                    ordersAdapter?.removeLoadingFooter()
-                                    isLoadNextItem = false
-                                } else {
-                                    setupAdapter(context, item.items)
-                                }
+            if(state.isLoadHistory) {
+                binding.rvOrder.visibility = View.GONE
+                binding.sflOrder.visibility = View.VISIBLE
+            } else {
+                if (binding.srlOrder.isRefreshing) binding.srlOrder.isRefreshing = false
+                binding.sflOrder.visibility = View.GONE
+                binding.rvOrder.visibility = View.VISIBLE
+                state.orderItemPaging?.let { paging ->
+                    if(paging.items?.isNotEmpty() == true) {
+                        binding.rvOrder.visibility = View.VISIBLE
+                        binding.tvNoData.visibility = View.GONE
+                        nextCursor = paging.nextCursor
+                        val hasMoreItem = paging.nextCursor != null
+                        if(hasMoreItem) {
+                            val cursor = nextCursor?.toInt() ?: -1
+                            if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
+                                ordersAdapter?.removeLoadingFooter()
+                                ordersAdapter?.addList(paging.items.toMutableList())
+                                isLoadNextItem = false
+                            } else { // first fetch
+                                setupAdapter(context, paging.items)
                             }
                         } else {
-                            binding.rvOrder.visibility = View.GONE
-                            binding.tvNoData.visibility = View.VISIBLE
+                            if(isLoadNextItem) {
+                                ordersAdapter?.removeLoadingFooter()
+                                isLoadNextItem = false
+                            } else {
+                                setupAdapter(context, paging.items)
+                            }
                         }
+                    } else {
+                        binding.rvOrder.visibility = View.GONE
+                        binding.tvNoData.visibility = View.VISIBLE
                     }
                 }
             }
+//            when (state.event) {
+//                EVENT_UPDATE_ORDERS -> {
+//                    state.orderItemPaging?.let { item ->
+//                        if(item.items?.isNotEmpty() == true) {
+//                            binding.rvOrder.visibility = View.VISIBLE
+//                            binding.tvNoData.visibility = View.GONE
+//                            nextCursor = item.nextCursor
+//                            val hasMoreItem = item.nextCursor != null
+//                            if(hasMoreItem) {
+//                                val cursor = nextCursor?.toInt() ?: -1
+//                                if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
+//                                    ordersAdapter?.removeLoadingFooter()
+//                                    ordersAdapter?.addList(item.items.toMutableList())
+//                                    isLoadNextItem = false
+//                                } else { // first fetch
+//                                    setupAdapter(context, item.items)
+//                                }
+//                            } else {
+//                                if(isLoadNextItem) {
+//                                    ordersAdapter?.removeLoadingFooter()
+//                                    isLoadNextItem = false
+//                                } else {
+//                                    setupAdapter(context, item.items)
+//                                }
+//                            }
+//                        } else {
+//                            binding.rvOrder.visibility = View.GONE
+//                            binding.tvNoData.visibility = View.VISIBLE
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

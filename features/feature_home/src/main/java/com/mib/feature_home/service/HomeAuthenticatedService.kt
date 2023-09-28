@@ -1,13 +1,10 @@
 package com.mib.feature_home.service
 
 import com.mib.feature_home.dto.request.AddCategoryRequest
-import com.mib.feature_home.dto.request.AddProductRequest
-import com.mib.feature_home.dto.request.AddPromoRequest
 import com.mib.feature_home.dto.request.AddSubcategoryRequest
 import com.mib.feature_home.dto.request.ApproveOrderRequest
 import com.mib.feature_home.dto.request.AvailabilityDayRequest
 import com.mib.feature_home.dto.request.CancelDoneOrderRequest
-import com.mib.feature_home.dto.request.SetAvailabilityRequest
 import com.mib.feature_home.dto.response.AdditionalDataResponse
 import com.mib.feature_home.dto.response.AdminBankResponse
 import com.mib.feature_home.dto.response.AvailabilityDayResponse
@@ -21,9 +18,9 @@ import com.mib.feature_home.dto.response.SubcategoryResponse
 import com.mib.feature_home.dto.response.SubscriptionOrderResponse
 import com.mib.feature_home.dto.response.SubscriptionTypeResponse
 import com.mib.feature_home.dto.response.UserSubscriptionResponse
+import com.mib.feature_home.dto.response.order_detail.OrderDetailResponse
 import com.mib.lib_api.dto.ApiResponse
 import com.mib.lib_api.dto.NetworkResponse
-import com.mib.lib_auth.dto.response.TokenResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -31,6 +28,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface HomeAuthenticatedService {
@@ -215,4 +213,9 @@ interface HomeAuthenticatedService {
     suspend fun doneOrder(
         @Body body: CancelDoneOrderRequest
     ): NetworkResponse<ApiResponse<Void>>
+
+    @GET("/order/detail/{order_id}")
+    suspend fun getOrderDetail(
+        @Path("order_id") orderId: String
+    ): NetworkResponse<ApiResponse<OrderDetailResponse>>
 }

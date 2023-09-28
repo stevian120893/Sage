@@ -10,9 +10,18 @@ import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.mib.feature_home.contents.order.action.OrderActionViewModel.Companion.EVENT_ORDER_SUCCEED
+import com.mib.feature_home.contents.order.action.OrderActionViewModel.Companion.EVENT_UPDATE_ORDER_DETAIL
 import com.mib.feature_home.databinding.FragmentOrderActionBinding
 import com.mib.feature_home.domain.model.PaymentMethod
+import com.mib.feature_home.domain.model.order_detail.OrderDetail
+import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.CANCEL
+import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.DONE
+import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.NEGOTIATING
+import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.ONGOING
+import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.WAITING_FOR_PAYMENT
 import com.mib.feature_home.utils.NumberTextWatcher
+import com.mib.feature_home.utils.removeThousandSeparator
 import com.mib.feature_home.utils.withThousandSeparator
 import com.mib.lib.mvvm.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +49,8 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this@OrderActionFragment, backPressedCallback)
+
+        viewModel.getOrderDetail(findNavController())
     }
 
     override fun onCreateView(
@@ -67,7 +78,15 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     private fun initListener() {
         binding.btSendInvoice.setOnClickListener {
-            viewModel.approveOrder(fragment = this)
+            val price = binding.etPrice.text.toString().removeThousandSeparator()
+            val bookingDate = binding.etBookingDate.text.toString()
+            val note = binding.etNotes.text.toString()
+            viewModel.approveOrder(
+                fragment = this,
+                price = price,
+                bookingDate = bookingDate,
+                note = note
+            )
         }
 
         binding.btCancel.setOnClickListener {
@@ -82,19 +101,55 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
     private fun observeLiveData(context: Context) {
         viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
-            state.bookingCode?.let {
-                binding.etBookingCode.setText(state.bookingCode)
-                binding.etPrice.setText(state.price?.withThousandSeparator())
-                binding.etBookingDate.setText(state.bookingDate)
-                binding.etNotes.setText(state.note)
-                paymentMethodAdapter = ArrayAdapter<String>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    state.paymentMethod?.map { it.name } ?: emptyList()
-                )
-                paymentMethodAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.snPaymentMethod.adapter = paymentMethodAdapter
-                setPaymentMethodSpinnerListener(state.paymentMethod)
+            when(state.event) {
+                EVENT_UPDATE_ORDER_DETAIL -> {
+                    if(state.isLoadOrderDetail) {
+                        binding.llContent.visibility = View.GONE
+                        binding.sflProductDetail.visibility = View.VISIBLE
+                    } else {
+                        binding.llContent.visibility = View.VISIBLE
+                        binding.sflProductDetail.visibility = View.GONE
+
+                        binding.etBookingCode.setText(state.orderDetail?.code.orEmpty())
+                        binding.etPrice.setText(state.orderDetail?.totalPrice.toString().withThousandSeparator())
+                        binding.etBookingDate.setText(state.orderDetail?.bookingDate)
+                        binding.etNotes.setText(state.orderDetail?.note)
+                        paymentMethodAdapter = ArrayAdapter<String>(
+                            context,
+                            android.R.layout.simple_spinner_item,
+                            state.paymentMethod?.map { it.name } ?: emptyList()
+                        )
+                        paymentMethodAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        binding.snPaymentMethod.adapter = paymentMethodAdapter
+                        setPaymentMethodSpinnerListener(state.paymentMethod)
+
+                        when(state.orderDetail?.status) {
+                            NEGOTIATING -> {
+                                binding.btSendInvoice.visibility = View.VISIBLE
+                                binding.btCancel.visibility = View.VISIBLE
+                            }
+                            WAITING_FOR_PAYMENT -> {
+                                binding.btCancel.visibility = View.VISIBLE
+                            }
+                            ONGOING -> {
+                                binding.btDone.visibility = View.VISIBLE
+                                binding.btCancel.visibility = View.VISIBLE
+                            }
+                            CANCEL -> {
+                                // nothing
+                            }
+                            DONE -> {
+                                // TODO: show rating
+                            }
+                            else -> {
+                                binding.btSendInvoice.visibility = View.GONE
+                                binding.btDone.visibility = View.GONE
+                                binding.btCancel.visibility = View.GONE
+                            }
+                        }
+                    }
+                }
+                EVENT_ORDER_SUCCEED -> {}
             }
         }
     }
