@@ -10,11 +10,9 @@ import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.mib.feature_home.contents.order.action.OrderActionViewModel.Companion.EVENT_ORDER_SUCCEED
 import com.mib.feature_home.contents.order.action.OrderActionViewModel.Companion.EVENT_UPDATE_ORDER_DETAIL
 import com.mib.feature_home.databinding.FragmentOrderActionBinding
 import com.mib.feature_home.domain.model.PaymentMethod
-import com.mib.feature_home.domain.model.order_detail.OrderDetail
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.CANCEL
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.DONE
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.NEGOTIATING
@@ -97,6 +95,10 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
             viewModel.goToOrderListScreen(findNavController())
         }
         binding.etPrice.addTextChangedListener(NumberTextWatcher(binding.etPrice))
+
+        binding.btDone.setOnClickListener {
+            viewModel.doneOrder(fragment = this)
+        }
     }
 
     private fun observeLiveData(context: Context) {
@@ -113,6 +115,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                         binding.etBookingCode.setText(state.orderDetail?.code.orEmpty())
                         binding.etPrice.setText(state.orderDetail?.totalPrice.toString().withThousandSeparator())
                         binding.etBookingDate.setText(state.orderDetail?.bookingDate)
+                        binding.etBookingTime.setText(state.orderDetail?.bookingTime)
                         binding.etNotes.setText(state.orderDetail?.note)
                         paymentMethodAdapter = ArrayAdapter<String>(
                             context,
@@ -149,7 +152,6 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                         }
                     }
                 }
-                EVENT_ORDER_SUCCEED -> {}
             }
         }
     }

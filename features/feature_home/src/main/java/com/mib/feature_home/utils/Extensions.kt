@@ -1,7 +1,6 @@
 package com.mib.feature_home.utils
 
 import android.Manifest
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
@@ -17,7 +16,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.mib.feature_home.R
-import com.mib.feature_home.utils.AppUtils.Companion.convertDate
+import com.mib.feature_home.utils.AppUtils.Companion.addZeroBelowTen
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Calendar
@@ -74,7 +73,7 @@ fun EditText.openTimePicker(context: Context, timeDialogListener: TimeDialogList
     val cal = Calendar.getInstance()
     val mTimePicker = TimePickerDialog(context, { _, selectedHour, selectedMinute ->
             timeDialogListener.onFinishSelectTime(
-                convertDate(selectedHour) + ":" + convertDate(
+                addZeroBelowTen(selectedHour) + ":" + addZeroBelowTen(
                     selectedMinute
                 )
             )
@@ -96,7 +95,7 @@ fun EditText.openDatePicker(context: Context, datePickerListener: DatePickerList
     val datePickerDialog = DatePickerDialog(context,
         { _, year, monthOfYear, dayOfMonth -> // set day of month , month and year value in the edit text
             datePickerListener.onFinishSelectDate(
-                "${convertDate(dayOfMonth)}-${convertDate((monthOfYear + 1))}-$year")
+                "${addZeroBelowTen(dayOfMonth)}-${addZeroBelowTen((monthOfYear + 1))}-$year")
         }, mYear, mMonth, mDay
     )
     datePickerDialog.show()

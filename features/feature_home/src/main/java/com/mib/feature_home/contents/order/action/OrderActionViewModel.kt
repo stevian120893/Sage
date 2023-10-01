@@ -78,20 +78,11 @@ class OrderActionViewModel @Inject constructor(
 
             withContext(mainDispatcher) {
                 result.first?.let {
-                    val isOrderDone = it.status == OrderDetail.DONE
-                    state = if(isOrderDone) {
-                        state.copy(
-                            event = EVENT_ORDER_SUCCEED,
-                            isLoadOrderDetail = false,
-                            orderDetail = it
-                        )
-                    } else {
-                        state.copy(
-                            event = EVENT_UPDATE_ORDER_DETAIL,
-                            isLoadOrderDetail = false,
-                            orderDetail = it
-                        )
-                    }
+                    state = state.copy(
+                        event = EVENT_UPDATE_ORDER_DETAIL,
+                        isLoadOrderDetail = false,
+                        orderDetail = it
+                    )
                 }
                 result.second?.let {
                     toastEvent.postValue(it)
@@ -204,12 +195,11 @@ class OrderActionViewModel @Inject constructor(
         var price: String? = null,
         var bookingDate: String? = null,
         var note: String? = null,
-        var paymentMethod: List<PaymentMethod>? = null,
+        var paymentMethod: List<PaymentMethod>? = null
     ) : BaseViewState
 
     companion object {
         const val NO_EVENT = 1
         const val EVENT_UPDATE_ORDER_DETAIL = 2
-        const val EVENT_ORDER_SUCCEED = 3
     }
 }

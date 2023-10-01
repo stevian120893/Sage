@@ -11,6 +11,7 @@ class OrderDetail (
     @Status val status: String,
     val orderDate: String,
     val bookingDate: String,
+    val bookingTime: String,
     val orderAcceptedAt: String,
     val totalPrice: BigDecimal,
     val discount: BigDecimal,

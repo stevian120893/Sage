@@ -107,6 +107,7 @@
     <string name="booking_code">Kode booking</string>
     <string name="customer_name">Nama pelanggan</string>
     <string name="booking_date">Tanggal booking</string>
+    <string name="booking_time">Jam booking</string>
     <string name="notes">Catatan</string>
     <string name="payment_method">Metode pembayaran</string>
     <string name="choose_order_to_action">Pilih order yang ingin anda pakai</string>

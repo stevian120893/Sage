@@ -106,6 +106,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Regular10Gray"
+                android:text="@string/booking_time"
+                android:layout_marginTop="@dimen/_16sdp"/>
+            <EditText
+                android:id="@+id/etBookingTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/booking_time"
+                style="@style/Regular14"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular10Gray"
                 android:text="@string/notes"
                 android:layout_marginTop="@dimen/_16sdp"/>
             <EditText

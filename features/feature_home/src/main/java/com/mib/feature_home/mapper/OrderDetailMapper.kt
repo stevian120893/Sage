@@ -34,6 +34,7 @@ fun OrderDetailResponse.toDomainModel(): OrderDetail {
         status = status.orEmpty(),
         orderDate = AppUtils.convertMillisToDate(this.orderDate),
         bookingDate = AppUtils.convertMillisToDate(this.bookingDate),
+        bookingTime = AppUtils.convertMillisToHour(this.bookingDate),
         orderAcceptedAt = AppUtils.convertMillisToDate(this.orderAcceptedAt),
         totalPrice = this.totalPrice ?: BigDecimal.ZERO,
         discount = this.discount ?: BigDecimal.ZERO,

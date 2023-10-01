@@ -1,6 +1,10 @@
 package com.mib.feature_home.utils
 
-import android.content.*
+import android.content.ActivityNotFoundException
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -9,23 +13,28 @@ import android.os.Build
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.DatePicker
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.internal.and
+import java.security.InvalidKeyException
+import java.security.NoSuchAlgorithmException
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
 
 
 class AppUtils {
@@ -253,13 +262,24 @@ class AppUtils {
             val dfYear = SimpleDateFormat("yyyy", Locale.getDefault())
 
             var date = dateInMillis*1000
-            val day = convertDate(dfDay.format(Date(date)).toInt())
-            val month = convertDate(dfMonth.format(Date(date)).toInt())
-            val year = convertDate(dfYear.format(Date(date)).toInt())
+            val day = addZeroBelowTen(dfDay.format(Date(date)).toInt())
+            val month = addZeroBelowTen(dfMonth.format(Date(date)).toInt())
+            val year = addZeroBelowTen(dfYear.format(Date(date)).toInt())
             return "$day-$month-$year"
         }
 
-        fun convertDate(input: Int): String {
+        fun convertMillisToHour(dateInMillis: Long?): String {
+            if(dateInMillis == null) return "-"
+            val dfHour = SimpleDateFormat("hh", Locale.getDefault())
+            val dfMinute = SimpleDateFormat("mm", Locale.getDefault())
+
+            val time = dateInMillis*1000
+            val hour = addZeroBelowTen(dfHour.format(Date(time)).toInt())
+            val minute = addZeroBelowTen(dfMinute.format(Date(time)).toInt())
+            return "$hour:$minute"
+        }
+
+        fun addZeroBelowTen(input: Int): String {
             return if (input >= 10) {
                 input.toString()
             } else {
