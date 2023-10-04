@@ -18,6 +18,7 @@ import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.DONE
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.NEGOTIATING
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.ONGOING
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.WAITING_FOR_PAYMENT
+import com.mib.feature_home.utils.AppUtils
 import com.mib.feature_home.utils.NumberTextWatcher
 import com.mib.feature_home.utils.removeThousandSeparator
 import com.mib.feature_home.utils.withThousandSeparator
@@ -78,11 +79,15 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
         binding.btSendInvoice.setOnClickListener {
             val price = binding.etPrice.text.toString().removeThousandSeparator()
             val bookingDate = binding.etBookingDate.text.toString()
+            val bookingTime = binding.etBookingTime.text.toString()
             val note = binding.etNotes.text.toString()
+
+            val bookingDateAndTime = "$bookingDate $bookingTime"
+            val timeInMillis = AppUtils.convertDateToMillis(bookingDateAndTime)
             viewModel.approveOrder(
                 fragment = this,
                 price = price,
-                bookingDate = bookingDate,
+                bookingDate = timeInMillis,
                 note = note
             )
         }

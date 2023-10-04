@@ -279,6 +279,13 @@ class AppUtils {
             return "$hour:$minute"
         }
 
+        fun convertDateToMillis(date: String): String {
+            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm")
+            val mDate = sdf.parse(date)
+            val sec = mDate.time/1000
+            return sec.toString()
+        }
+
         fun addZeroBelowTen(input: Int): String {
             return if (input >= 10) {
                 input.toString()
