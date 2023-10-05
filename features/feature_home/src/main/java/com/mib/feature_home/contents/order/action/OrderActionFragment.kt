@@ -19,7 +19,11 @@ import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.NEGO
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.ONGOING
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.WAITING_FOR_PAYMENT
 import com.mib.feature_home.utils.AppUtils
+import com.mib.feature_home.utils.DatePickerListener
 import com.mib.feature_home.utils.NumberTextWatcher
+import com.mib.feature_home.utils.TimeDialogListener
+import com.mib.feature_home.utils.openDatePicker
+import com.mib.feature_home.utils.openTimePicker
 import com.mib.feature_home.utils.removeThousandSeparator
 import com.mib.feature_home.utils.withThousandSeparator
 import com.mib.lib.mvvm.BaseFragment
@@ -65,7 +69,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadingDialogNavigation.subscribe(this, false)
         lifecycleScope.launch {
-            initListener()
+            initListener(view.context)
             observeLiveData(view.context)
         }
     }
@@ -75,7 +79,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
         _binding = null
     }
 
-    private fun initListener() {
+    private fun initListener(context: Context) {
         binding.btSendInvoice.setOnClickListener {
             val price = binding.etPrice.text.toString().removeThousandSeparator()
             val bookingDate = binding.etBookingDate.text.toString()
@@ -103,6 +107,26 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
 
         binding.btDone.setOnClickListener {
             viewModel.doneOrder(fragment = this)
+        }
+
+        binding.etBookingDate.let { et ->
+            et.setOnClickListener {
+                et.openDatePicker(context, object: DatePickerListener {
+                    override fun onFinishSelectDate(result: String) {
+                        binding.etBookingDate.setText(result)
+                    }
+                })
+            }
+        }
+
+        binding.etBookingTime.let { et ->
+            et.setOnClickListener {
+                et.openTimePicker(context, object: TimeDialogListener {
+                    override fun onFinishSelectTime(result: String) {
+                        binding.etBookingTime.setText(result)
+                    }
+                })
+            }
         }
     }
 
@@ -142,6 +166,10 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                             ONGOING -> {
                                 binding.btDone.visibility = View.VISIBLE
                                 binding.btCancel.visibility = View.VISIBLE
+                                binding.snPaymentMethod.visibility = View.GONE
+                                binding.etUsedPaymentMethod.visibility = View.VISIBLE
+
+                                binding.etUsedPaymentMethod.setText(state.orderDetail?.usedPaymentMethod.orEmpty())
                             }
                             CANCEL -> {
                                 // nothing

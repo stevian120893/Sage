@@ -14,5 +14,6 @@ fun OrderResponse.toDomainModel(): Order {
         bookingDate = AppUtils.convertMillisToDate(this.bookingDate),
         totalPayment = this.totalPayment?.toBigDecimal() ?: BigDecimal.ZERO,
         note = this.note.orEmpty(),
+        userName = this.userName.orEmpty()
     )
 }

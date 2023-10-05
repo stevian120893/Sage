@@ -17,4 +17,6 @@ class OrderResponse (
     val totalPayment: String?,
     @SerializedName("note")
     val note: String?,
+    @SerializedName("user_name")
+    val userName: String?
 )

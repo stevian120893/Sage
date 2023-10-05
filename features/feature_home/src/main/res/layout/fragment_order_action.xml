@@ -59,6 +59,14 @@
                 style="@style/Regular10Gray"
                 android:text="@string/payment_method"
                 android:layout_marginTop="@dimen/_16sdp"/>
+            <EditText
+                android:id="@+id/etUsedPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular14"
+                android:enabled="false"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_2sdp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/booking_date"
                 style="@style/Regular14"
+                android:focusable="false"
                 android:layout_marginTop="@dimen/_2sdp"/>
 
             <TextView
@@ -114,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/booking_time"
                 style="@style/Regular14"
+                android:focusable="false"
                 android:layout_marginTop="@dimen/_2sdp"/>
 
             <TextView

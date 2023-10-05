@@ -11,6 +11,7 @@ class Order(
     val bookingDate: String,
     val totalPayment: BigDecimal,
     val note: String,
+    val userName: String
 ) {
     companion object {
         @StringDef(
