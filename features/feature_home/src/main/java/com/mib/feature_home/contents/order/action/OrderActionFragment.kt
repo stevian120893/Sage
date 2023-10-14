@@ -170,12 +170,14 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                                 binding.etUsedPaymentMethod.visibility = View.VISIBLE
 
                                 binding.etUsedPaymentMethod.setText(state.orderDetail?.usedPaymentMethod.orEmpty())
+                                setFieldsUnableToEdit()
                             }
                             CANCEL -> {
-                                // nothing
+                                setFieldsUnableToEdit()
                             }
                             DONE -> {
                                 // TODO: show rating
+                                setFieldsUnableToEdit()
                             }
                             else -> {
                                 binding.btSendInvoice.visibility = View.GONE
@@ -187,6 +189,13 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                 }
             }
         }
+    }
+
+    private fun setFieldsUnableToEdit() {
+        binding.etPrice.isEnabled = false
+        binding.etBookingDate.isEnabled = false
+        binding.etBookingTime.isEnabled = false
+        binding.etNotes.isEnabled = false
     }
 
     private fun setPaymentMethodSpinnerListener(paymentMethod: List<PaymentMethod>?) {
