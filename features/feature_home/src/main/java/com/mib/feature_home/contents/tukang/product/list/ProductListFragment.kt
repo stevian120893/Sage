@@ -126,32 +126,42 @@ class ProductListFragment : BaseFragment<ProductListViewModel>(0) {
                     setSubcategorySpinnerListener(state.subcategories)
                 }
                 EVENT_UPDATE_PRODUCTS_ITEM -> {
-                    state.productsItemPaging?.let { productsItem ->
-                        if(productsItem.items?.isNotEmpty() == true) {
-                            binding.rvProduct.visibility = View.VISIBLE
-                            binding.tvNoData.visibility = View.GONE
-                            nextCursor = productsItem.nextCursor
-                            val hasMoreItem = productsItem.nextCursor != null
-                            if(hasMoreItem) {
-                                val cursor = nextCursor?.toInt() ?: -1
-                                if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
-                                    productsAdapter?.removeLoadingFooter()
-                                    productsAdapter?.addList(productsItem.items.toMutableList())
-                                    isLoadNextItem = false
-                                } else { // first fetch
-                                    setupAdapter(context, productsItem.items)
+                    if(state.isLoadProducts) {
+                        if(state.shouldShowShimmer) {
+                            binding.rvProduct.visibility = View.GONE
+                            binding.sflProduct.visibility = View.VISIBLE
+                        }
+                    } else {
+                        binding.sflProduct.visibility = View.GONE
+                        binding.rvProduct.visibility = View.VISIBLE
+                        state.productsItemPaging?.let { productsItem ->
+                            if (productsItem.items?.isNotEmpty() == true) {
+                                binding.rvProduct.visibility = View.VISIBLE
+                                binding.tvNoData.visibility = View.GONE
+                                nextCursor = productsItem.nextCursor
+                                val hasMoreItem = productsItem.nextCursor != null
+                                if (hasMoreItem) {
+                                    val cursor = nextCursor?.toInt() ?: -1
+                                    if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
+                                        productsAdapter?.removeLoadingFooter()
+                                        productsAdapter?.addList(productsItem.items.toMutableList())
+                                        isLoadNextItem = false
+                                    } else { // first fetch
+                                        setupAdapter(context, productsItem.items)
+                                    }
+                                } else {
+                                    if (isLoadNextItem) {
+                                        productsAdapter?.removeLoadingFooter()
+                                        productsAdapter?.addList(productsItem.items.toMutableList())
+                                        isLoadNextItem = false
+                                    } else {
+                                        setupAdapter(context, productsItem.items)
+                                    }
                                 }
                             } else {
-                                if(isLoadNextItem) {
-                                    productsAdapter?.removeLoadingFooter()
-                                    isLoadNextItem = false
-                                } else {
-                                    setupAdapter(context, productsItem.items)
-                                }
+                                binding.rvProduct.visibility = View.GONE
+                                binding.tvNoData.visibility = View.VISIBLE
                             }
-                        } else {
-                            binding.rvProduct.visibility = View.GONE
-                            binding.tvNoData.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -180,7 +190,7 @@ class ProductListFragment : BaseFragment<ProductListViewModel>(0) {
     }
 
     private fun setupAdapter(context: Context, products: List<Product>) {
-        binding.rvProduct.adapter = ProductsAdapter(
+        productsAdapter = ProductsAdapter(
             context = context,
             itemList = products.toMutableList(),
             onItemClickListener = object : ProductsAdapter.OnItemClickListener {
@@ -189,11 +199,12 @@ class ProductListFragment : BaseFragment<ProductListViewModel>(0) {
                 }
             }
         )
+        binding.rvProduct.adapter = productsAdapter
     }
 
     companion object {
+        const val DEFAULT_NEXT_CURSOR_REQUEST = "1"
         private const val MAX_PAGINATION_ITEMS = 10
-        private const val DEFAULT_NEXT_CURSOR_REQUEST = "1"
         private const val DEFAULT_NEXT_CURSOR_RESPONSE = 2
     }
 }

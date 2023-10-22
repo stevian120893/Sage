@@ -10,9 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mib.feature_home.adapter.PromosAdapter
-import com.mib.feature_home.contents.tukang.category.list.CategoryListFragment
 import com.mib.feature_home.databinding.FragmentPromoListBinding
 import com.mib.feature_home.domain.model.Promo
 import com.mib.feature_home.utils.AppUtils
@@ -57,7 +55,6 @@ class PromoListFragment : BaseFragment<PromoListViewModel>(0) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadingDialog.subscribe(this, true)
         lifecycleScope.launch {
             AppUtils.firstSetRecyclerView(view.context, LinearLayoutManager.VERTICAL, binding.rvPromo)
             initListener()
@@ -105,32 +102,41 @@ class PromoListFragment : BaseFragment<PromoListViewModel>(0) {
     private fun observeLiveData(context: Context) {
         viewModel.stateLiveData.observe(viewLifecycleOwner) {
             viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
-                state.promosItemPaging?.let { promosItem ->
-                    if(promosItem.items?.isNotEmpty() == true) {
-                        binding.rvPromo.visibility = View.VISIBLE
-                        binding.tvNoData.visibility = View.GONE
-                        nextCursor = promosItem.nextCursor
-                        val hasMoreItem = promosItem.nextCursor != null
-                        if(hasMoreItem) {
-                            val cursor = nextCursor?.toInt() ?: -1
-                            if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
-                                promosAdapter?.removeLoadingFooter()
-                                promosAdapter?.addList(promosItem.items.toMutableList())
-                                isLoadNextItem = false
-                            } else { // first fetch
-                                setupAdapter(context, promosItem.items)
+                if(state.isLoadItems) {
+                    if(state.shouldShowShimmer) {
+                        binding.rvPromo.visibility = View.GONE
+                        binding.sflPromo.visibility = View.VISIBLE
+                    }
+                } else {
+                    binding.sflPromo.visibility = View.GONE
+                    binding.rvPromo.visibility = View.VISIBLE
+                    state.promosItemPaging?.let { promosItem ->
+                        if (promosItem.items?.isNotEmpty() == true) {
+                            binding.rvPromo.visibility = View.VISIBLE
+                            binding.tvNoData.visibility = View.GONE
+                            nextCursor = promosItem.nextCursor
+                            val hasMoreItem = promosItem.nextCursor != null
+                            if (hasMoreItem) {
+                                val cursor = nextCursor?.toInt() ?: -1
+                                if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
+                                    promosAdapter?.removeLoadingFooter()
+                                    promosAdapter?.addList(promosItem.items.toMutableList())
+                                    isLoadNextItem = false
+                                } else { // first fetch
+                                    setupAdapter(context, promosItem.items)
+                                }
+                            } else {
+                                if (isLoadNextItem) {
+                                    promosAdapter?.removeLoadingFooter()
+                                    isLoadNextItem = false
+                                } else {
+                                    setupAdapter(context, promosItem.items)
+                                }
                             }
                         } else {
-                            if(isLoadNextItem) {
-                                promosAdapter?.removeLoadingFooter()
-                                isLoadNextItem = false
-                            } else {
-                                setupAdapter(context, promosItem.items)
-                            }
+                            binding.rvPromo.visibility = View.GONE
+                            binding.tvNoData.visibility = View.VISIBLE
                         }
-                    } else {
-                        binding.rvPromo.visibility = View.GONE
-                        binding.tvNoData.visibility = View.VISIBLE
                     }
                 }
             }
@@ -138,7 +144,7 @@ class PromoListFragment : BaseFragment<PromoListViewModel>(0) {
     }
 
     private fun setupAdapter(context: Context, promos: List<Promo>) {
-        binding.rvPromo.adapter = PromosAdapter(
+         promosAdapter = PromosAdapter(
             context = context,
             itemList = promos.toMutableList(),
             onItemClickListener = object : PromosAdapter.OnItemClickListener {
@@ -147,6 +153,7 @@ class PromoListFragment : BaseFragment<PromoListViewModel>(0) {
                 }
             }
         )
+        binding.rvPromo.adapter = promosAdapter
     }
 
     companion object {

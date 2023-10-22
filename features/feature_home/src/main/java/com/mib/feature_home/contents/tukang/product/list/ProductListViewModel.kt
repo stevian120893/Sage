@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.mib.feature_home.R
+import com.mib.feature_home.contents.order.list.OrderListFragment
+import com.mib.feature_home.contents.tukang.product.list.ProductListFragment.Companion.DEFAULT_NEXT_CURSOR_REQUEST
 import com.mib.feature_home.domain.model.Category
 import com.mib.feature_home.domain.model.Product
 import com.mib.feature_home.domain.model.ProductsItemPaging
@@ -95,19 +97,23 @@ class ProductListViewModel @Inject constructor(
     }
 
     fun fetchProducts(fragment: Fragment, nextCursor: String? = null) {
+        state = state.copy(
+            event = EVENT_UPDATE_PRODUCTS_ITEM,
+            isLoadProducts = true,
+            shouldShowShimmer = !nextCursor.isNullOrEmpty() && nextCursor == DEFAULT_NEXT_CURSOR_REQUEST
+        )
         if(selectedCategoryId != null && selectedSubcategoryId != null) {
-            loadingDialog.show()
             viewModelScope.launch(ioDispatcher) {
                 val result = getProductsUseCase(
                     categoryId = selectedCategoryId.orEmpty(),
                     subcategoryId = selectedSubcategoryId.orEmpty(),
                     cursor = nextCursor
                 )
-                loadingDialog.dismiss()
 
                 withContext(mainDispatcher) {
                     result.first.items.let {
                         state = state.copy(
+                            isLoadProducts = false,
                             event = EVENT_UPDATE_PRODUCTS_ITEM,
                             productsItemPaging = result.first
                         )
@@ -166,6 +172,8 @@ class ProductListViewModel @Inject constructor(
 
     data class ViewState(
         var event: Int? = null,
+        var isLoadProducts: Boolean = false,
+        var shouldShowShimmer: Boolean = false,
         var categories: List<Category>? = null,
         var subcategories: List<Subcategory>? = null,
         var productsItemPaging: ProductsItemPaging? = null

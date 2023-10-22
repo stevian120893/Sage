@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mib.feature_home.adapter.OrdersAdapter
-import com.mib.feature_home.contents.order.list.OrderListViewModel.Companion.EVENT_UPDATE_ORDERS
 import com.mib.feature_home.databinding.FragmentOrderListBinding
 import com.mib.feature_home.domain.model.Order
 import com.mib.feature_home.utils.AppUtils
@@ -94,8 +93,10 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
     private fun observeLiveData(context: Context) {
         viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             if(state.isLoadHistory) {
-                binding.rvOrder.visibility = View.GONE
-                binding.sflOrder.visibility = View.VISIBLE
+                if(state.shouldShowShimmer) {
+                    binding.rvOrder.visibility = View.GONE
+                    binding.sflOrder.visibility = View.VISIBLE
+                }
             } else {
                 if (binding.srlOrder.isRefreshing) binding.srlOrder.isRefreshing = false
                 binding.sflOrder.visibility = View.GONE
@@ -118,6 +119,7 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
                         } else {
                             if(isLoadNextItem) {
                                 ordersAdapter?.removeLoadingFooter()
+                                ordersAdapter?.addList(paging.items.toMutableList())
                                 isLoadNextItem = false
                             } else {
                                 setupAdapter(context, paging.items)
@@ -129,43 +131,11 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
                     }
                 }
             }
-//            when (state.event) {
-//                EVENT_UPDATE_ORDERS -> {
-//                    state.orderItemPaging?.let { item ->
-//                        if(item.items?.isNotEmpty() == true) {
-//                            binding.rvOrder.visibility = View.VISIBLE
-//                            binding.tvNoData.visibility = View.GONE
-//                            nextCursor = item.nextCursor
-//                            val hasMoreItem = item.nextCursor != null
-//                            if(hasMoreItem) {
-//                                val cursor = nextCursor?.toInt() ?: -1
-//                                if (cursor > DEFAULT_NEXT_CURSOR_RESPONSE) {
-//                                    ordersAdapter?.removeLoadingFooter()
-//                                    ordersAdapter?.addList(item.items.toMutableList())
-//                                    isLoadNextItem = false
-//                                } else { // first fetch
-//                                    setupAdapter(context, item.items)
-//                                }
-//                            } else {
-//                                if(isLoadNextItem) {
-//                                    ordersAdapter?.removeLoadingFooter()
-//                                    isLoadNextItem = false
-//                                } else {
-//                                    setupAdapter(context, item.items)
-//                                }
-//                            }
-//                        } else {
-//                            binding.rvOrder.visibility = View.GONE
-//                            binding.tvNoData.visibility = View.VISIBLE
-//                        }
-//                    }
-//                }
-//            }
         }
     }
 
     private fun setupAdapter(context: Context, orders: List<Order>) {
-        binding.rvOrder.adapter = OrdersAdapter(
+        ordersAdapter = OrdersAdapter(
             context = context,
             itemList = orders.toMutableList(),
             onItemClickListener = object : OrdersAdapter.OnItemClickListener {
@@ -174,6 +144,7 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
                 }
             }
         )
+        binding.rvOrder.adapter = ordersAdapter
     }
 
     companion object {
@@ -181,9 +152,9 @@ class OrderListFragment : BaseFragment<OrderListViewModel>(0) {
         const val KEY_ORDER_BOOKING_PRICE = "order_booking_price"
         const val KEY_ORDER_BOOKING_DATE = "order_booking_date"
         const val KEY_ORDER_BOOKING_NOTE = "order_booking_note"
+        const val DEFAULT_NEXT_CURSOR_REQUEST = "1"
 
         private const val MAX_PAGINATION_ITEMS = 10
-        private const val DEFAULT_NEXT_CURSOR_REQUEST = "1"
         private const val DEFAULT_NEXT_CURSOR_RESPONSE = 2
     }
 }

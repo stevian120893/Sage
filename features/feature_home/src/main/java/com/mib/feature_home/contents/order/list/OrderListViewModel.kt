@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.DEFAULT_NEXT_CURSOR_REQUEST
 import com.mib.feature_home.domain.model.Order
 import com.mib.feature_home.domain.model.OrderItemPaging
 import com.mib.feature_home.usecase.GetOrdersUseCase
@@ -35,7 +36,7 @@ class OrderListViewModel @Inject constructor(
     override val toastEvent: SingleLiveEvent<String> = SingleLiveEvent()
 
     fun fetchOrders(fragment: Fragment, nextCursor: String? = null) {
-        state = state.copy(isLoadHistory = true)
+        state = state.copy(isLoadHistory = true, shouldShowShimmer = !nextCursor.isNullOrEmpty() && nextCursor == DEFAULT_NEXT_CURSOR_REQUEST)
         viewModelScope.launch(ioDispatcher) {
             val result = getOrdersUseCase(nextCursor)
 
@@ -43,7 +44,6 @@ class OrderListViewModel @Inject constructor(
                 result.first?.items.let {
                     state = state.copy(
                         isLoadHistory = false,
-                        event = EVENT_UPDATE_ORDERS,
                         orderItemPaging = result.first
                     )
                 }
@@ -87,13 +87,8 @@ class OrderListViewModel @Inject constructor(
     }
 
     data class ViewState(
-        var event: Int? = null,
         var isLoadHistory: Boolean = false,
+        var shouldShowShimmer: Boolean = false,
         var orderItemPaging: OrderItemPaging? = null
     ) : BaseViewState
-
-    companion object {
-        internal const val NO_EVENT = 0
-        internal const val EVENT_UPDATE_ORDERS = 1
-    }
 }
