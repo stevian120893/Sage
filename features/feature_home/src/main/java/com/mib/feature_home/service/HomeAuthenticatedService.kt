@@ -5,6 +5,7 @@ import com.mib.feature_home.dto.request.AddSubcategoryRequest
 import com.mib.feature_home.dto.request.ApproveOrderRequest
 import com.mib.feature_home.dto.request.AvailabilityDayRequest
 import com.mib.feature_home.dto.request.CancelDoneOrderRequest
+import com.mib.feature_home.dto.request.PaymentActionRequest
 import com.mib.feature_home.dto.response.AdditionalDataResponse
 import com.mib.feature_home.dto.response.AdminBankResponse
 import com.mib.feature_home.dto.response.AvailabilityDayResponse
@@ -218,4 +219,14 @@ interface HomeAuthenticatedService {
     suspend fun getOrderDetail(
         @Path("order_id") orderId: String
     ): NetworkResponse<ApiResponse<OrderDetailResponse>>
+
+    @POST("/order/accept-payment")
+    suspend fun acceptPayment(
+        @Body body: PaymentActionRequest
+    ): NetworkResponse<ApiResponse<Void>>
+
+    @POST("/order/reject-payment")
+    suspend fun rejectPayment(
+        @Body body: PaymentActionRequest
+    ): NetworkResponse<ApiResponse<Void>>
 }

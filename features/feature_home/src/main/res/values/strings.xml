@@ -50,6 +50,7 @@
     <string name="shared_res_status">Status</string>
     <string name="shared_res_status_negotiating">Dalam penawaran</string>
     <string name="shared_res_status_waiting_for_payment">Menunggu pembayaran</string>
+    <string name="shared_res_status_pending_payment_approval">Menunggu penerimaan</string>
     <string name="shared_res_status_ongoing">Sedang dikerjakan</string>
     <string name="shared_res_status_cancel">Dibatalkan</string>
     <string name="shared_res_status_done">Selesai</string>
@@ -163,4 +164,9 @@
 
 <!--    order-->
     <string name="done_order">Pesanan Selesai</string>
+    <string name="accept_payment">Terima pembayaran</string>
+    <string name="reject_payment">Tolak pembayaran</string>
+    <string name="payment_accepted">Pembayaran telah diterima, harap lanjutkan proses order!</string>
+    <string name="payment_rejected">Pembayaran belum diterima</string>
+    <string name="payment_receipt">Bukti pembayaran</string>
 </resources>

@@ -6,5 +6,7 @@ class ProductResponse (
     @SerializedName("code")
     val code: String?,
     @SerializedName("name")
-    val name: String?
+    val name: String?,
+    @SerializedName("image")
+    val image: String?
 )

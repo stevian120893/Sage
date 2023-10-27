@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.mib.feature_home.contents.order.action.OrderActionViewModel.Companion.EVENT_UPDATE_ORDER_DETAIL
 import com.mib.feature_home.databinding.FragmentOrderActionBinding
 import com.mib.feature_home.domain.model.PaymentMethod
@@ -17,6 +18,7 @@ import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.CANC
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.DONE
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.NEGOTIATING
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.ONGOING
+import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.PENDING_PAYMENT_APPROVAL
 import com.mib.feature_home.domain.model.order_detail.OrderDetail.Companion.WAITING_FOR_PAYMENT
 import com.mib.feature_home.utils.AppUtils
 import com.mib.feature_home.utils.DatePickerListener
@@ -109,6 +111,17 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
             viewModel.doneOrder(fragment = this)
         }
 
+        binding.btAcceptPayment.setOnClickListener {
+            viewModel.paymentAction(
+                fragment = this,
+                isPaymentReceived = true
+            )
+        }
+
+        binding.btRejectPayment.setOnClickListener {
+            viewModel.paymentAction(fragment = this)
+        }
+
         binding.etBookingDate.let { et ->
             et.setOnClickListener {
                 et.openDatePicker(context, object: DatePickerListener {
@@ -162,6 +175,12 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                             }
                             WAITING_FOR_PAYMENT -> {
                                 binding.btCancel.visibility = View.VISIBLE
+                            }
+                            PENDING_PAYMENT_APPROVAL -> {
+                                binding.llPaymentReceipt.visibility = View.VISIBLE
+                                Glide.with(this).load(state.orderDetail?.paymentReceiptImage).into(binding.ivPaymentReceipt)
+                                binding.btAcceptPayment.visibility = View.VISIBLE
+                                binding.btRejectPayment.visibility = View.VISIBLE
                             }
                             ONGOING -> {
                                 binding.btDone.visibility = View.VISIBLE

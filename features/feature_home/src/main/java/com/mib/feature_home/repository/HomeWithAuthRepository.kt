@@ -106,4 +106,12 @@ interface HomeWithAuthRepository {
     suspend fun getOrderDetail(
         orderId: String
     ): Pair<OrderDetail?, String?>
+
+    suspend fun acceptPayment(
+        code: String
+    ): Pair<Void?, String?>
+
+    suspend fun rejectPayment(
+        code: String
+    ): Pair<Void?, String?>
 }

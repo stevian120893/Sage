@@ -17,7 +17,8 @@ fun OrderDetailResponse.toDomainModel(): OrderDetail {
 
     val product = OrderDetailProduct(
         code = this.detail?.product?.code.orEmpty(),
-        name = this.detail?.product?.name.orEmpty()
+        name = this.detail?.product?.name.orEmpty(),
+        imageUrl = this.detail?.product?.image.orEmpty()
     )
 
     val detail = Detail(

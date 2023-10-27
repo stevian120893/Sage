@@ -12,6 +12,7 @@ object CustomUtils {
         return when (status) {
             Order.NEGOTIATING -> context.getString(R.string.shared_res_status_negotiating)
             Order.WAITING_FOR_PAYMENT -> context.getString(R.string.shared_res_status_waiting_for_payment)
+            Order.PENDING_PAYMENT_APPROVAL -> context.getString(R.string.shared_res_status_pending_payment_approval)
             Order.ONGOING -> context.getString(R.string.shared_res_status_ongoing)
             Order.CANCEL -> context.getString(R.string.shared_res_status_cancel)
             Order.DONE -> context.getString(R.string.shared_res_status_done)

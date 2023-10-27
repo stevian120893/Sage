@@ -2,6 +2,7 @@ package com.mib.feature_home.di
 
 import com.mib.feature_home.repository.HomeRepository
 import com.mib.feature_home.repository.HomeWithAuthRepository
+import com.mib.feature_home.usecase.AcceptPaymentUseCase
 import com.mib.feature_home.usecase.AddAdditionalDataUseCase
 import com.mib.feature_home.usecase.AddCategoryUseCase
 import com.mib.feature_home.usecase.AddProductUseCase
@@ -28,6 +29,7 @@ import com.mib.feature_home.usecase.GetSubscriptionTypeUseCase
 import com.mib.feature_home.usecase.GetUseCase
 import com.mib.feature_home.usecase.GetUserSubscriptionUseCase
 import com.mib.feature_home.usecase.RegisterUseCase
+import com.mib.feature_home.usecase.RejectPaymentUseCase
 import com.mib.feature_home.usecase.SaveProfileUseCase
 import com.mib.feature_home.usecase.SetAvailabilityDaysUseCase
 import com.mib.feature_home.usecase.auth.SendCodeUseCase
@@ -186,5 +188,15 @@ object HomeUseCaseModule {
     @Provides
     fun provideGetOrderDetailUseCase(repo: HomeWithAuthRepository): GetOrderDetailUseCase {
         return GetOrderDetailUseCase(repo)
+    }
+
+    @Provides
+    fun provideAcceptPaymentUseCase(repo: HomeWithAuthRepository): AcceptPaymentUseCase {
+        return AcceptPaymentUseCase(repo)
+    }
+
+    @Provides
+    fun provideRejectPaymentUseCase(repo: HomeWithAuthRepository): RejectPaymentUseCase {
+        return RejectPaymentUseCase(repo)
     }
 }

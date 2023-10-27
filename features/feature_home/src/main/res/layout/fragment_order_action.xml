@@ -141,6 +141,27 @@
                 android:inputType="textCapSentences"
                 android:layout_marginTop="@dimen/_2sdp"/>
 
+            <LinearLayout
+                android:id="@+id/llPaymentReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Regular10Gray"
+                    android:text="@string/payment_receipt"
+                    android:layout_marginTop="@dimen/_16sdp"/>
+                <ImageView
+                    android:id="@+id/ivPaymentReceipt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:padding="@dimen/_5sdp"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btDone"
                 android:layout_width="match_parent"
@@ -170,6 +191,28 @@
                 android:background="@drawable/bg_rounded_6"
                 android:backgroundTint="@color/red"
                 android:text="@string/shared_res_cancel"
+                style="@style/ButtonText"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_16sdp"/>
+
+            <Button
+                android:id="@+id/btAcceptPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_6"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/accept_payment"
+                style="@style/ButtonText"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_30sdp"/>
+
+            <Button
+                android:id="@+id/btRejectPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_6"
+                android:backgroundTint="@color/red"
+                android:text="@string/reject_payment"
                 style="@style/ButtonText"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_16sdp"/>

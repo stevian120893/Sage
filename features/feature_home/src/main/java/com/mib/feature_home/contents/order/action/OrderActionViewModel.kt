@@ -15,10 +15,12 @@ import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_
 import com.mib.feature_home.contents.order.list.OrderListFragment.Companion.KEY_ORDER_BOOKING_PRICE
 import com.mib.feature_home.domain.model.PaymentMethod
 import com.mib.feature_home.domain.model.order_detail.OrderDetail
+import com.mib.feature_home.usecase.AcceptPaymentUseCase
 import com.mib.feature_home.usecase.ApproveOrderUseCase
 import com.mib.feature_home.usecase.CancelOrderUseCase
 import com.mib.feature_home.usecase.DoneOrderUseCase
 import com.mib.feature_home.usecase.GetOrderDetailUseCase
+import com.mib.feature_home.usecase.RejectPaymentUseCase
 import com.mib.lib.mvvm.BaseViewModel
 import com.mib.lib.mvvm.BaseViewState
 import com.mib.lib_api.ApiConstants
@@ -45,6 +47,8 @@ class OrderActionViewModel @Inject constructor(
     private val approveOrderUseCase: ApproveOrderUseCase,
     private val cancelOrderUseCase: CancelOrderUseCase,
     private val doneOrderUseCase: DoneOrderUseCase,
+    private val acceptPaymentUseCase: AcceptPaymentUseCase,
+    private val rejectPaymentUseCase: RejectPaymentUseCase,
     private val unauthorizedErrorNavigation: UnauthorizedErrorNavigation,
     val loadingDialogNavigation: LoadingDialogNavigation
 ) : BaseViewModel<OrderActionViewModel.ViewState>(ViewState(NO_EVENT)) {
@@ -165,6 +169,40 @@ class OrderActionViewModel @Inject constructor(
             withContext(mainDispatcher) {
                 result.first?.let {
                     toastEvent.postValue(fragment.context?.getString(R.string.shared_res_success_to_save))
+                    goToOrderListScreen(fragment.findNavController())
+                }
+                result.second?.let {
+                    toastEvent.postValue(it)
+                    if(it == ApiConstants.ERROR_MESSAGE_UNAUTHORIZED) {
+                        withContext(mainDispatcher) {
+                            unauthorizedErrorNavigation.handleErrorMessage(fragment.findNavController(), it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun paymentAction(fragment: Fragment, isPaymentReceived: Boolean = false) {
+        if(state.bookingCode == null) return
+
+        loadingDialogNavigation.show()
+        viewModelScope.launch(ioDispatcher) {
+            val result = if(isPaymentReceived) {
+                acceptPaymentUseCase.invoke(code = state.bookingCode.orEmpty())
+            } else {
+                rejectPaymentUseCase.invoke(code = state.bookingCode.orEmpty())
+            }
+
+            loadingDialogNavigation.dismiss()
+            withContext(mainDispatcher) {
+                result.first?.let {
+                    val resultMessage = if(isPaymentReceived) {
+                        fragment.context?.getString(R.string.payment_accepted)
+                    } else {
+                        fragment.context?.getString(R.string.payment_rejected)
+                    }
+                    toastEvent.postValue(resultMessage)
                     goToOrderListScreen(fragment.findNavController())
                 }
                 result.second?.let {

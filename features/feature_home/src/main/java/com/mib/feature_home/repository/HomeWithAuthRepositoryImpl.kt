@@ -19,6 +19,7 @@ import com.mib.feature_home.dto.request.AddSubcategoryRequest
 import com.mib.feature_home.dto.request.ApproveOrderRequest
 import com.mib.feature_home.dto.request.AvailabilityDayRequest
 import com.mib.feature_home.dto.request.CancelDoneOrderRequest
+import com.mib.feature_home.dto.request.PaymentActionRequest
 import com.mib.feature_home.mapper.toDomainModel
 import com.mib.feature_home.service.HomeAuthenticatedService
 import com.mib.feature_home.usecase.AddCategoryUseCase.Companion.ACTION_ADD
@@ -537,6 +538,38 @@ class HomeWithAuthRepositoryImpl(
         return when (val result = service.getOrderDetail(orderId)) {
             is NetworkResponse.Success -> {
                 val item = result.value.data?.toDomainModel()
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun acceptPayment(code: String): Pair<Void?, String?> {
+        val paymentActionRequest = PaymentActionRequest(code = code)
+
+        val result = service.acceptPayment(paymentActionRequest)
+
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun rejectPayment(code: String): Pair<Void?, String?> {
+        val paymentActionRequest = PaymentActionRequest(code = code)
+
+        val result = service.rejectPayment(paymentActionRequest)
+
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data
                 item to null
             }
             else -> {
