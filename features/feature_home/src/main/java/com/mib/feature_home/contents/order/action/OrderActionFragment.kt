@@ -154,6 +154,10 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                         binding.llContent.visibility = View.VISIBLE
                         binding.sflProductDetail.visibility = View.GONE
 
+                        if(!state.orderDetail?.detail?.product?.imageUrl.isNullOrBlank()) {
+                            Glide.with(context).load(state.orderDetail?.detail?.product?.imageUrl).into(binding.ivProductImage)
+                        }
+                        binding.tvProductName.text = state.orderDetail?.detail?.product?.name
                         binding.etBookingCode.setText(state.orderDetail?.code.orEmpty())
                         binding.etPrice.setText(state.orderDetail?.totalPrice.toString().withThousandSeparator())
                         binding.etBookingDate.setText(state.orderDetail?.bookingDate)
@@ -175,28 +179,33 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                             }
                             WAITING_FOR_PAYMENT -> {
                                 binding.btCancel.visibility = View.VISIBLE
+                                binding.snPaymentMethod.isEnabled = false
                             }
                             PENDING_PAYMENT_APPROVAL -> {
                                 binding.llPaymentReceipt.visibility = View.VISIBLE
                                 Glide.with(this).load(state.orderDetail?.paymentReceiptImage).into(binding.ivPaymentReceipt)
                                 binding.btAcceptPayment.visibility = View.VISIBLE
                                 binding.btRejectPayment.visibility = View.VISIBLE
+                                binding.snPaymentMethod.isEnabled = false
                             }
                             ONGOING -> {
                                 binding.btDone.visibility = View.VISIBLE
                                 binding.btCancel.visibility = View.VISIBLE
                                 binding.snPaymentMethod.visibility = View.GONE
                                 binding.etUsedPaymentMethod.visibility = View.VISIBLE
+                                binding.snPaymentMethod.isEnabled = false
 
                                 binding.etUsedPaymentMethod.setText(state.orderDetail?.usedPaymentMethod.orEmpty())
                                 setFieldsUnableToEdit()
                             }
                             CANCEL -> {
                                 setFieldsUnableToEdit()
+                                binding.snPaymentMethod.isEnabled = false
                             }
                             DONE -> {
                                 // TODO: show rating
                                 setFieldsUnableToEdit()
+                                binding.snPaymentMethod.isEnabled = false
                             }
                             else -> {
                                 binding.btSendInvoice.visibility = View.GONE
