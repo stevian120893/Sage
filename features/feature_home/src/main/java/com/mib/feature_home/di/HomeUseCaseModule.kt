@@ -32,6 +32,7 @@ import com.mib.feature_home.usecase.RegisterUseCase
 import com.mib.feature_home.usecase.RejectPaymentUseCase
 import com.mib.feature_home.usecase.SaveProfileUseCase
 import com.mib.feature_home.usecase.SetAvailabilityDaysUseCase
+import com.mib.feature_home.usecase.auth.SaveFcmTokenUseCase
 import com.mib.feature_home.usecase.auth.SendCodeUseCase
 import com.mib.lib_auth.repository.SessionRepository
 import dagger.Module
@@ -198,5 +199,10 @@ object HomeUseCaseModule {
     @Provides
     fun provideRejectPaymentUseCase(repo: HomeWithAuthRepository): RejectPaymentUseCase {
         return RejectPaymentUseCase(repo)
+    }
+
+    @Provides
+    fun provideSaveFcmTokenUseCase(repo: HomeWithAuthRepository): SaveFcmTokenUseCase {
+        return SaveFcmTokenUseCase(repo)
     }
 }

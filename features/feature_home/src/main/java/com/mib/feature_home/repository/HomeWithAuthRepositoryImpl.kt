@@ -20,6 +20,7 @@ import com.mib.feature_home.dto.request.ApproveOrderRequest
 import com.mib.feature_home.dto.request.AvailabilityDayRequest
 import com.mib.feature_home.dto.request.CancelDoneOrderRequest
 import com.mib.feature_home.dto.request.PaymentActionRequest
+import com.mib.feature_home.dto.request.SetFcmTokenRequest
 import com.mib.feature_home.mapper.toDomainModel
 import com.mib.feature_home.service.HomeAuthenticatedService
 import com.mib.feature_home.usecase.AddCategoryUseCase.Companion.ACTION_ADD
@@ -567,6 +568,22 @@ class HomeWithAuthRepositoryImpl(
 
         val result = service.rejectPayment(paymentActionRequest)
 
+        return when (result) {
+            is NetworkResponse.Success -> {
+                val item = result.value.data
+                item to null
+            }
+            else -> {
+                null to result.getErrorMessage()
+            }
+        }
+    }
+
+    override suspend fun saveFcmToken(fcmToken: String): Pair<Void?, String?> {
+        val setFcmTokenRequest = SetFcmTokenRequest(
+            fcmToken = fcmToken
+        )
+        val result = service.setFcmToken(setFcmTokenRequest)
         return when (result) {
             is NetworkResponse.Success -> {
                 val item = result.value.data

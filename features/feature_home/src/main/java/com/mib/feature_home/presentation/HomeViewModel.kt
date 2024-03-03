@@ -1,21 +1,34 @@
 package com.mib.feature_home.presentation
 
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import com.mib.feature_home.usecase.auth.SaveFcmTokenUseCase
 import com.mib.lib.mvvm.BaseViewModel
 import com.mib.lib.mvvm.BaseViewState
 import com.mib.lib.mvvm.utils.DialogUtils
 import com.mib.lib_auth.repository.SessionRepository
+import com.mib.lib_coroutines.IODispatcher
+import com.mib.lib_coroutines.MainDispatcher
 import com.mib.lib_navigation.DialogListener
 import com.mib.lib_navigation.HomeNavigation
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    @IODispatcher private val ioDispatcher: CoroutineContext,
+    @MainDispatcher private val mainDispatcher: CoroutineContext,
     private val homeNavigation: HomeNavigation,
-    private val sessionRepository: SessionRepository
+    private val sessionRepository: SessionRepository,
+    private val saveFcmTokenUseCase: SaveFcmTokenUseCase
 ) : BaseViewModel<HomeViewModel.ViewState>(ViewState()) {
 
     fun goToOtherScreen(navController: NavController, destination: String) {
@@ -52,6 +65,41 @@ class HomeViewModel @Inject constructor(
                 override fun onRightButtonClicked() {}
             }
         )
+    }
+
+    fun setFirebaseToken() {
+        val isLoggedIn = !sessionRepository.getAccessToken().isNullOrBlank()
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            if(isLoggedIn) {
+                if(sessionRepository.getFcmToken() != token)
+                    saveFcmToken(token)
+            }
+        })
+    }
+
+    private fun saveFcmToken(token: String) {
+        viewModelScope.launch(ioDispatcher) {
+            val result = saveFcmTokenUseCase(token)
+
+            withContext(mainDispatcher) {
+                result.first?.let {
+                    sessionRepository.saveFcmToken(token)
+                }
+                result.second?.let {
+                    // failed to save fcm token to server
+                    toastEvent.postValue(it)
+                }
+            }
+        }
     }
 
     private fun clearLocalSession() {

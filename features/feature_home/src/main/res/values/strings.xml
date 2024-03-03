@@ -169,4 +169,7 @@
     <string name="payment_accepted">Pembayaran telah diterima, harap lanjutkan proses order!</string>
     <string name="payment_rejected">Pembayaran belum diterima</string>
     <string name="payment_receipt">Bukti pembayaran</string>
+
+    <string name="default_notification_channel_id">general_admin</string>
+    <string name="app_notification_channel_id">sage_admin</string>
 </resources>

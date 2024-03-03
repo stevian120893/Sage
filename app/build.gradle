@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 apply from: "$rootDir/gradle_scripts/hilt.gradle"
 apply from: "$rootDir/gradle_scripts/keystore.gradle"
 apply from: "$rootDir/gradle_scripts/param.gradle"
@@ -48,7 +48,7 @@ android {
             minifyEnabled false
             testCoverageEnabled true
             versionNameSuffix "-debug"
-            applicationIdSuffix ".debug"
+//            applicationIdSuffix ".debug"
             buildConfigField "String", "FILE_AUTHORITY", "\"${appId}.debug.provider\""
             manifestPlaceholders.fileProviderAuthority = "${appId}.debug.provider"
             ndk {
@@ -98,10 +98,10 @@ dependencies {
     kapt "$appDependencies.deeplinkProcessor"
 
     // Firebase
-//    implementation platform("$appDependencies.firebaseBom")
-//    implementation "$appDependencies.firebaseAnalytic"
+    implementation platform("$appDependencies.firebaseBom")
+    implementation "$appDependencies.firebaseAnalytic"
 //    implementation "$appDependencies.firebaseConfig"
-//    implementation "$appDependencies.firebaseCrashlytic"
+    implementation "$appDependencies.firebaseCrashlytic"
 //    implementation "$appDependencies.firebaseCore"
-//    implementation "$appDependencies.firebaseMessaging"
+    implementation "$appDependencies.firebaseMessaging"
 }

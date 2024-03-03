@@ -32,6 +32,8 @@ class SessionPref(
 
     var journeyType: Int by _appBoundPref.int(key = JOURNEY_TYPE, defaultValue = JOURNEY_NOT_STARTED)
 
+    var fcmToken: String by _userBoundPref.string(key = FCM_TOKEN)
+
     /**
      * Journey id of user, used in tracker
      * won't be cleared when the user logs out
@@ -66,6 +68,7 @@ class SessionPref(
         private const val SESSION_TYPE = "sessionType"
         private const val USER_ID = "userId"
         private const val JOURNEY_TYPE = "journeyType"
+        private const val FCM_TOKEN = "fcmToken"
 
         const val JOURNEY_NOT_STARTED = -1
         const val JOURNEY_FIRST = 0

@@ -114,4 +114,8 @@ interface HomeWithAuthRepository {
     suspend fun rejectPayment(
         code: String
     ): Pair<Void?, String?>
+
+    suspend fun saveFcmToken(
+        fcmToken: String
+    ): Pair<Void?, String?>
 }

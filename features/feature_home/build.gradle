@@ -40,4 +40,9 @@ dependencies {
     implementation "$appDependencies.facebookShimmer"
     implementation "$appDependencies.swipeRefreshLayout"
     implementation "$appDependencies.zelory"
+
+    implementation "$appDependencies.firebaseMessaging"
+    implementation platform("$appDependencies.firebaseBom")
+    implementation "$appDependencies.firebaseAnalytic"
+    implementation "$appDependencies.firebaseCrashlytic"
 }

@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "70852067844",
-    "project_id": "sarisari-production-1311",
-    "storage_bucket": "sarisari-production-1311.appspot.com"
+    "project_number": "253372716057",
+    "project_id": "sage-bbf03",
+    "storage_bucket": "sage-bbf03.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:70852067844:android:4e7038f6c502e2c5ac6b51",
+        "mobilesdk_app_id": "1:253372716057:android:4e6b32db9a0a014a220688",
         "android_client_info": {
           "package_name": "com.mib.sage"
         }
       },
       "oauth_client": [
         {
-          "client_id": "70852067844-mjd8kk0cgjvbka7i3k15t2n4bb5t8gco.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mib.sage",
-            "certificate_hash": "fb104ef6cca8c0d23f82c3087594ca21200e9dd3"
-          }
-        },
-        {
-          "client_id": "70852067844-en5ueqm1bvirn6meo1j20r1kiiulig0p.apps.googleusercontent.com",
+          "client_id": "253372716057-qarjv9glaqqkr94jjbfkro0ot4hvf02a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDebp-ygQ8DVwFEcBIwp43ZpiNIzISQI0"
+          "current_key": "AIzaSyB9iLs_Z0qyZjOEgd4Zny7dqFtC7UC2jkg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "70852067844-en5ueqm1bvirn6meo1j20r1kiiulig0p.apps.googleusercontent.com",
+              "client_id": "253372716057-qarjv9glaqqkr94jjbfkro0ot4hvf02a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -44,35 +36,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:70852067844:android:2c780f705696994dac6b51",
+        "mobilesdk_app_id": "1:253372716057:android:df7e01f2ff8db0af220688",
         "android_client_info": {
-          "package_name": "com.mib.sage.debug"
+          "package_name": "com.mib.sage_user"
         }
       },
       "oauth_client": [
         {
-          "client_id": "70852067844-8baibjm2i3t6pr9hc66ar5rse865ot9q.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mib.sage.debug",
-            "certificate_hash": "b5457e95c0459d86372f42031522fd368ef8d691"
-          }
-        },
-        {
-          "client_id": "70852067844-en5ueqm1bvirn6meo1j20r1kiiulig0p.apps.googleusercontent.com",
+          "client_id": "253372716057-qarjv9glaqqkr94jjbfkro0ot4hvf02a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDebp-ygQ8DVwFEcBIwp43ZpiNIzISQI0"
+          "current_key": "AIzaSyB9iLs_Z0qyZjOEgd4Zny7dqFtC7UC2jkg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "70852067844-en5ueqm1bvirn6meo1j20r1kiiulig0p.apps.googleusercontent.com",
+              "client_id": "253372716057-qarjv9glaqqkr94jjbfkro0ot4hvf02a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

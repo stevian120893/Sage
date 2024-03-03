@@ -43,4 +43,12 @@ class SessionRepositoryImpl(
         UserBoundPref.clear()
         secureSessionPref.clear()
     }
+    override fun saveFcmToken(token: String?) {
+        sessionPref.fcmToken = token.orEmpty()
+    }
+
+    override fun getFcmToken(): String {
+        return sessionPref.fcmToken
+    }
+
 }

@@ -34,4 +34,8 @@ interface SessionRepository {
      * Delete existing session information, this is called on logout.
      */
     fun clearLocalSession()
+
+    fun saveFcmToken(token: String?)
+
+    fun getFcmToken(): String?
 }

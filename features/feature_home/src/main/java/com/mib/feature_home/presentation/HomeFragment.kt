@@ -40,6 +40,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(0) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+        viewModel.setFirebaseToken()
     }
 
     override fun onCreateView(
