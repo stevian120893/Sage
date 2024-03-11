@@ -157,6 +157,7 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                         if(!state.orderDetail?.detail?.product?.imageUrl.isNullOrBlank()) {
                             Glide.with(context).load(state.orderDetail?.detail?.product?.imageUrl).into(binding.ivProductImage)
                         }
+                        binding.tvStatus.text = state.orderDetail?.status
                         binding.tvProductName.text = state.orderDetail?.detail?.product?.name
                         binding.etBookingCode.setText(state.orderDetail?.code.orEmpty())
                         binding.etPrice.setText(state.orderDetail?.totalPrice.toString().withThousandSeparator())
@@ -179,33 +180,29 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
                             }
                             WAITING_FOR_PAYMENT -> {
                                 binding.btCancel.visibility = View.VISIBLE
-                                binding.snPaymentMethod.isEnabled = false
+                                showUsedPaymentMethod(state.orderDetail?.usedPaymentMethod.orEmpty())
                             }
                             PENDING_PAYMENT_APPROVAL -> {
                                 binding.llPaymentReceipt.visibility = View.VISIBLE
                                 Glide.with(this).load(state.orderDetail?.paymentReceiptImage).into(binding.ivPaymentReceipt)
                                 binding.btAcceptPayment.visibility = View.VISIBLE
                                 binding.btRejectPayment.visibility = View.VISIBLE
-                                binding.snPaymentMethod.isEnabled = false
+                                showUsedPaymentMethod(state.orderDetail?.usedPaymentMethod.orEmpty())
                             }
                             ONGOING -> {
                                 binding.btDone.visibility = View.VISIBLE
                                 binding.btCancel.visibility = View.VISIBLE
-                                binding.snPaymentMethod.visibility = View.GONE
-                                binding.etUsedPaymentMethod.visibility = View.VISIBLE
-                                binding.snPaymentMethod.isEnabled = false
-
-                                binding.etUsedPaymentMethod.setText(state.orderDetail?.usedPaymentMethod.orEmpty())
+                                showUsedPaymentMethod(state.orderDetail?.usedPaymentMethod.orEmpty())
                                 setFieldsUnableToEdit()
                             }
                             CANCEL -> {
                                 setFieldsUnableToEdit()
-                                binding.snPaymentMethod.isEnabled = false
+                                showUsedPaymentMethod(state.orderDetail?.usedPaymentMethod.orEmpty())
                             }
                             DONE -> {
                                 // TODO: show rating
                                 setFieldsUnableToEdit()
-                                binding.snPaymentMethod.isEnabled = false
+                                showUsedPaymentMethod(state.orderDetail?.usedPaymentMethod.orEmpty())
                             }
                             else -> {
                                 binding.btSendInvoice.visibility = View.GONE
@@ -224,6 +221,12 @@ class OrderActionFragment : BaseFragment<OrderActionViewModel>(0) {
         binding.etBookingDate.isEnabled = false
         binding.etBookingTime.isEnabled = false
         binding.etNotes.isEnabled = false
+    }
+
+    private fun showUsedPaymentMethod(paymentMethod: String) {
+        binding.snPaymentMethod.visibility = View.GONE
+        binding.etUsedPaymentMethod.visibility = View.VISIBLE
+        binding.etUsedPaymentMethod.setText(paymentMethod)
     }
 
     private fun setPaymentMethodSpinnerListener(paymentMethod: List<PaymentMethod>?) {

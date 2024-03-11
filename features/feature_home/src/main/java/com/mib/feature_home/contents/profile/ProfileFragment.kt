@@ -101,8 +101,14 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(0) {
     private fun observeLiveData() {
         viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             state.profile?.let { profile ->
-                binding.tvReferralCode.text = profile.referralCode
+                // tier
+                Glide.with(this@ProfileFragment)
+                    .load(profile.tier.imageTier)
+                    .into(binding.ivTier)
+                binding.tvReferralAmount.text = profile.tier.referralAmount
                 binding.tvTierName.text = profile.tier.currentTier
+
+                binding.tvReferralCode.text = profile.referralCode
                 binding.etName.setText(profile.name)
                 binding.etLocation.setText(profile.cityName)
                 binding.etBankName.setText(profile.bankName)

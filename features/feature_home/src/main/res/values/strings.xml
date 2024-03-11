@@ -66,6 +66,9 @@
     <string name="profile_bank_account_number">Nomor Rekening</string>
     <string name="profile_referral_code">Kode referal</string>
     <string name="profile_tier_name">Nama level</string>
+    <string name="profile_referral_amount">Jumlah referral</string>
+    <string name="profile_more_information">Informasi lebih lanjut</string>
+    <string name="profile_bank_info">Informasi Bank akun</string>
 
 <!--    register-->
     <string name="register_verification_code">Kode</string>

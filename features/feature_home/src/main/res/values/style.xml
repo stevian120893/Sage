@@ -129,6 +129,20 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="Regular12White">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/font_poppins_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Regular12GreenDark">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorPrimaryGreenDark</item>
+        <item name="fontFamily">@font/font_poppins_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="Regular10Gray">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/textColorGray</item>
@@ -178,6 +192,13 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="SemiBold14White">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="SemiBold12">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/textColorPrimary</item>
@@ -213,9 +234,23 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="SemiBold16White">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="SemiBold18">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SemiBold18White">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -230,6 +265,13 @@
     <style name="Bold30">
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="fontFamily">@font/font_poppins_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Bold20White">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/font_poppins_bold</item>
         <item name="android:includeFontPadding">false</item>
     </style>
