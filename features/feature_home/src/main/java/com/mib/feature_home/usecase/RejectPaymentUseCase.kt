@@ -6,7 +6,7 @@ class RejectPaymentUseCase(private val homeWithAuthRepository: HomeWithAuthRepos
     suspend operator fun invoke(
         code: String,
     ): Pair<Void?, String?> {
-        return homeWithAuthRepository.doneOrder(
+        return homeWithAuthRepository.rejectPayment(
             code,
         )
     }
